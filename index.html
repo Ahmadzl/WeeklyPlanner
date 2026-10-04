@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weekly Work Planner</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+            background: #ffffff;
+            padding: 18px 24px;
+            border-bottom: 1px solid #ddd;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header p {
+            margin: 5px 0 0;
+            color: #777;
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        button {
+            border: none;
+            border-radius: 7px;
+            padding: 9px 14px;
+            cursor: pointer;
+            font-size: 14px;
+            background: #222;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        /* =========================
+           MAIN
+        ========================== */
+
+        .main {
+            display: flex;
+            min-height: calc(100vh - 90px);
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================== */
+
+        .sidebar {
+            width: 220px;
+            min-width: 220px;
+
+            height: calc(100vh - 90px);
+
+            background: white;
+
+            border-right: 1px solid #ddd;
+
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+
+            overflow: hidden;
+        }
+
+        /* =========================
+           COMPANY LIST SCROLL
+        ========================== */
+
+        .company-list {
+            display: flex;
+            flex-direction: column;
+
+            gap: 8px;
+
+            overflow-y: auto;
+
+            flex: 1;
+
+            min-height: 0;
+
+            padding-right: 5px;
+        }
+
+        .company-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .company-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        .company-list::-webkit-scrollbar-thumb {
+            background: #bbb;
+            border-radius: 5px;
+        }
+
+        .company-list::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+
+        /* =========================
+           COMPANY CARD IN SIDEBAR
+        ========================== */
+
+        .company-card {
+            padding: 12px;
+
+            background: #ffffff;
+
+            border: 1px solid #d5d9dd;
+
+            border-left: 5px solid #4a44f2;
+
+            border-radius: 7px;
+
+            cursor: grab;
+
+            user-select: none;
+
+            font-weight: 600;
+
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+            transition: 0.15s;
+        }
+
+        .company-card:hover {
+            background: #f4f5ff;
+            transform: translateX(2px);
+        }
+
+        .company-card:active {
+            cursor: grabbing;
+        }
+
+        /* =========================
+           GROUP
+        ========================== */
+
+        .company-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .company-group-children {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+
+        .company-group-children .company-card {
+            border-left: 4px solid #9b9ff2;
+            font-weight: 500;
+            padding: 10px;
+        }
+
+        /* =========================
+           PLANNER CONTAINER
+        ========================== */
+
+        .planner-container {
+            flex: 1;
+
+            overflow: auto;
+
+            padding: 20px;
+        }
+
+        .week-title {
+            background: white;
+
+            padding: 14px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 8px 8px 0 0;
+
+            text-align: center;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           PLANNER
+        ========================== */
+
+        .planner {
+            min-width: 950px;
+
+            background: white;
+
+            border-left: 1px solid #ddd;
+
+            border-top: 1px solid #ddd;
+        }
+
+        .grid-row {
+            display: grid;
+
+            grid-template-columns:
+                75px
+                repeat(5, minmax(170px, 1fr));
+        }
+
+        /* =========================
+           CELLS
+        ========================== */
+
+        .cell {
+            min-height: 75px;
+
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+
+            padding: 6px;
+        }
+
+        .header-cell {
+            min-height: 55px;
+
+            background: #f1f3f5;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+        .time-cell {
+            background: #fafafa;
+
+            font-weight: bold;
+
+            color: #555;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: center;
+
+            padding-top: 10px;
+        }
+
+        /* =========================
+           DROP ZONE
+        ========================== */
+
+        .drop-zone {
+            background: #ffffff;
+
+            transition: background 0.15s;
+        }
+
+        .drop-zone.drag-over {
+            background: #e9ebff;
+        }
+
+        /* =========================
+           COMPANY LIST INSIDE CELL
+        ========================== */
+
+        .companies-in-cell {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            min-height: 60px;
+        }
+
+        /* =========================
+           PLACED COMPANY
+        ========================== */
+
+        .placed-company {
+            background: #4a44f2;
+
+            color: white;
+
+            border-radius: 7px;
+
+            padding: 8px 9px;
+
+            font-weight: bold;
+
+            cursor: grab;
+
+            user-select: none;
+
+            box-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.15);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 7px;
+
+            min-height: 38px;
+        }
+
+        .placed-company:hover {
+            opacity: 0.93;
+        }
+
+        .placed-company:active {
+            cursor: grabbing;
+        }
+
+        .company-name {
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+        }
+
+        /* =========================
+           REMOVE BUTTON
+        ========================== */
+
+        .remove-company {
+            flex-shrink: 0;
+
+            background: rgba(255, 255, 255, 0.18);
+
+            color: white;
+
+            border: none;
+
+            padding: 2px 7px;
+
+            border-radius: 5px;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            line-height: 1;
+        }
+
+        .remove-company:hover {
+            background: rgba(255, 255, 255, 0.35);
+
+            opacity: 1;
+        }
+
+        /* =========================
+           EMPTY CELL
+        ========================== */
+
+        .empty-cell {
+            min-height: 60px;
+        }
+
+        /* =========================
+           MOBILE / TABLET
+        ========================== */
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 180px;
+                min-width: 180px;
+            }
+
+            .planner-container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 14px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .grid-row {
+                grid-template-columns:
+                    65px
+                    repeat(5, 150px);
+            }
+
+            .cell {
+                min-height: 70px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                Weekly Work Planner
+            </h1>
+
+            <!-- <p>
+                Drag companies into the correct day and time.
+            </p> -->
+
+        </div>
+
+
+        <div class="controls">
+
+            <button onclick="resetPlanner()">
+                Reset
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <div class="main">
+
+
+        <!-- =========================
+             COMPANY SIDEBAR
+        ========================== -->
+
+        <aside class="sidebar">
+
+            <h2>
+                Companies
+            </h2>
+
+
+            <!-- <div class="sidebar-info">
+
+                Drag a company into the planner.
+                You can use the same company multiple times.
+
+            </div> -->
+
+
+            <div
+                id="companyList"
+                class="company-list">
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             PLANNER
+        ========================== -->
+
+        <section class="planner-container">
+
+            <div class="week-title">
+
+                Weekly Schedule
+
+            </div>
+
+
+            <div
+                id="planner"
+                class="planner">
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script>
+
+        /* =========================================================
+           COMPANY LIST
+
+           Normal companies are strings.
+
+           Groups use this format:
+
+           {
+               name: "Danmark",
+               children: [
+                   "BOBO ApS",
+                   "XL MØBLER ApS"
+               ]
+           }
+
+           Dragging the group adds ALL children.
+           Dragging a child adds only that child.
+           ========================================================= */
+
+        const companies = [
+
+        {
+                name: "Danmark",
+                children: [
+                    "XL MØBLER ApS",
+                    "Fårup Furniture (Møbelkompagniet)",
+                    "BOBO ApS",
+                    "BFT",
+                    "Stenløse Havemøbelcenter",
+                    "Salesstyling Aps",
+                    "Other"
+                ]
+            },
+
+            {
+                name: "Furniture1 Hungary",
+                children: [
+                    "Croatia",
+                    "Romania",
+                    "Bulgarien",
+                    "Hungary",
+                    "Slovenia"
+                ]
+            },
+
+            {
+                name: "Furniture1 Lithuania",
+                children: [
+                    "EStonia",
+                    "Lithuania",
+                    "Latvia"
+                ]
+            },
+
+            {       
+                name: "Furniture1 Germany",
+                children: [
+                    "United Kingdom",
+                    "Ireland",
+                    "Netherlands"
+                ]
+            },
+
+            "AKL TRADE OÜ",
+            "PK Invest ApS",
+            "SELSEY Sp. z o.o.",
+
+            
+
+            "Sohome b.v.",
+            "CONDI SERVICES",
+            "Otto Group",
+
+            "Skeidar Holding AS",
+            "Ellos NO"
+
+        ];
+
+
+        /* =========================================================
+           DAYS
+        ========================================================= */
+
+        const days = [
+
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+
+        ];
+
+
+        /* =========================================================
+           TIMES
+
+           07:00 - 16:00
+        ========================================================= */
+
+        const times = [
+
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00"
+
+        ];
+
+
+        /* =========================================================
+           LOCAL STORAGE
+        ========================================================= */
+
+        const STORAGE_KEY =
+            "weeklyWorkPlanner";
+
+
+        /* =========================================================
+           LOAD SAVED DATA
+        ========================================================= */
+
+        let schedule =
+            JSON.parse(
+                localStorage.getItem(STORAGE_KEY)
+                || "{}"
+            );
+
+
+        /* =========================================================
+           CREATE COMPANY SIDEBAR
+        ========================================================= */
+
+        function createCompanyList() {
+
+            const list =
+                document.getElementById(
+                    "companyList"
+                );
+
+
+            list.innerHTML = "";
+
+
+            companies.forEach(item => {
+
+
+                /* =================================================
+                   NORMAL COMPANY
+                ================================================= */
+
+                if (typeof item === "string") {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "company-card";
+
+
+                    card.textContent =
+                        item;
+
+
+                    card.draggable = true;
+
+
+                    card.dataset.company =
+                        item;
+
+
+                    /*
+                     * Dragging a normal company
+                     * creates a NEW copy.
+                     */
+
+                    card.addEventListener(
+                        "dragstart",
+                        function(event) {
+
+                            event.dataTransfer.setData(
+
+                                "text/plain",
+
+                                JSON.stringify({
+
+                                    company: item,
+
+                                    source: "sidebar"
+
+                                })
+
+                            );
+
+                        }
+                    );
+
+
+                    list.appendChild(
+                        card
+                    );
+
+                }
+
+
+                /* =================================================
+                   COMPANY GROUP
+                ================================================= */
+
+                else {
+
+                    const group =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    group.className =
+                        "company-group";
+
+
+                    /* =========================
+                       GROUP HEADER
+                    ========================== */
+
+                    const groupHeader =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    groupHeader.className =
+                        "company-card";
+
+
+                    groupHeader.style.cursor =
+                        "grab";
+
+
+                    groupHeader.innerHTML =
+                        "▶ " + item.name;
+
+
+                    /*
+                     * The group itself is draggable.
+                     *
+                     * Dragging it adds ALL
+                     * companies inside the group.
+                     */
+
+                    groupHeader.draggable =
+                        true;
+
+
+                    groupHeader.addEventListener(
+                        "dragstart",
+                        function(event) {
+
+                            event.dataTransfer.setData(
+
+                                "text/plain",
+
+                                JSON.stringify({
+
+                                    source: "group",
+
+                                    companies:
+                                        item.children
+
+                                })
+
+                            );
+
+                        }
+                    );
+
+
+                    /* =========================
+                       CHILDREN CONTAINER
+                    ========================== */
+
+                    const childrenContainer =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    childrenContainer.className =
+                        "company-group-children";
+
+
+                    childrenContainer.style.display =
+                        "none";
+
+
+                    /* =========================
+                       CHILD COMPANIES
+                    ========================== */
+
+                    item.children.forEach(
+                        childCompany => {
+
+                            const child =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            child.className =
+                                "company-card";
+
+
+                            child.textContent =
+                                childCompany;
+
+
+                            child.draggable =
+                                true;
+
+
+                            child.dataset.company =
+                                childCompany;
+
+
+                            /*
+                             * Dragging one child
+                             * adds ONLY that company.
+                             */
+
+                            child.addEventListener(
+                                "dragstart",
+                                function(event) {
+
+                                    event.stopPropagation();
+
+
+                                    event.dataTransfer.setData(
+
+                                        "text/plain",
+
+                                        JSON.stringify({
+
+                                            company:
+                                                childCompany,
+
+                                            source:
+                                                "sidebar"
+
+                                        })
+
+                                    );
+
+                                }
+                            );
+
+
+                            childrenContainer.appendChild(
+                                child
+                            );
+
+                        }
+                    );
+
+
+                    /* =========================
+                       OPEN / CLOSE GROUP
+                    ========================== */
+
+                    groupHeader.addEventListener(
+                        "click",
+                        function() {
+
+                            const isHidden =
+                                childrenContainer.style.display
+                                === "none";
+
+
+                            if (isHidden) {
+
+                                childrenContainer.style.display =
+                                    "flex";
+
+                                groupHeader.innerHTML =
+                                    "▼ " + item.name;
+
+                            }
+                            else {
+
+                                childrenContainer.style.display =
+                                    "none";
+
+                                groupHeader.innerHTML =
+                                    "▶ " + item.name;
+
+                            }
+
+                        }
+                    );
+
+
+                    group.appendChild(
+                        groupHeader
+                    );
+
+
+                    group.appendChild(
+                        childrenContainer
+                    );
+
+
+                    list.appendChild(
+                        group
+                    );
+
+                }
+
+            });
+
+        }
+
+
+        /* =========================================================
+           CREATE PLANNER
+        ========================================================= */
+
+        function createPlanner() {
+
+            const planner =
+                document.getElementById(
+                    "planner"
+                );
+
+
+            planner.innerHTML = "";
+
+
+            /* =========================
+               HEADER ROW
+            ========================== */
+
+            const headerRow =
+                document.createElement(
+                    "div"
+                );
+
+
+            headerRow.className =
+                "grid-row";
+
+
+            /* Time header */
+
+            const timeHeader =
+                document.createElement(
+                    "div"
+                );
+
+
+            timeHeader.className =
+                "cell header-cell";
+
+
+            timeHeader.textContent =
+                "Time";
+
+
+            headerRow.appendChild(
+                timeHeader
+            );
+
+
+            /* Day headers */
+
+            days.forEach(day => {
+
+                const dayHeader =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                dayHeader.className =
+                    "cell header-cell";
+
+
+                dayHeader.textContent =
+                    day;
+
+
+                headerRow.appendChild(
+                    dayHeader
+                );
+
+            });
+
+
+            planner.appendChild(
+                headerRow
+            );
+
+
+            /* =========================
+               TIME ROWS
+            ========================== */
+
+            times.forEach(time => {
+
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "grid-row";
+
+
+                /* Time */
+
+                const timeCell =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                timeCell.className =
+                    "cell time-cell";
+
+
+                timeCell.textContent =
+                    time;
+
+
+                row.appendChild(
+                    timeCell
+                );
+
+
+                /* Days */
+
+                days.forEach(day => {
+
+                    const cell =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    cell.className =
+                        "cell drop-zone";
+
+
+                    cell.dataset.day =
+                        day;
+
+
+                    cell.dataset.time =
+                        time;
+
+
+                    /* Drag over */
+
+                    cell.addEventListener(
+                        "dragover",
+                        function(event) {
+
+                            event.preventDefault();
+
+                            cell.classList.add(
+                                "drag-over"
+                            );
+
+                        }
+                    );
+
+
+                    /* Drag leave */
+
+                    cell.addEventListener(
+                        "dragleave",
+                        function() {
+
+                            cell.classList.remove(
+                                "drag-over"
+                            );
+
+                        }
+                    );
+
+
+                    /* Drop */
+
+                    cell.addEventListener(
+                        "drop",
+                        function(event) {
+
+                            event.preventDefault();
+
+                            cell.classList.remove(
+                                "drag-over"
+                            );
+
+
+                            handleDrop(
+                                event,
+                                cell
+                            );
+
+                        }
+                    );
+
+
+                    row.appendChild(
+                        cell
+                    );
+
+                });
+
+
+                planner.appendChild(
+                    row
+                );
+
+            });
+
+
+            renderSchedule();
+
+        }
+
+
+        /* =========================================================
+           HANDLE DROP
+        ========================================================= */
+
+        function handleDrop(
+            event,
+            cell
+        ) {
+
+            const data =
+                JSON.parse(
+                    event.dataTransfer.getData(
+                        "text/plain"
+                    )
+                );
+
+
+            const company =
+                data.company;
+
+
+            const newDay =
+                cell.dataset.day;
+
+
+            const newTime =
+                cell.dataset.time;
+
+
+            const newKey =
+                createKey(
+                    newDay,
+                    newTime
+                );
+
+
+            /* =====================================================
+               IF FROM GROUP
+
+               Add ALL companies from the group.
+
+               Example:
+
+               Danmark
+               ├── BOBO ApS
+               └── XL MØBLER ApS
+
+               Dragging Danmark adds both.
+            ===================================================== */
+
+            if (
+                data.source === "group"
+            ) {
+
+                if (
+                    !schedule[newKey]
+                ) {
+
+                    schedule[newKey] = [];
+
+                }
+
+
+                data.companies.forEach(
+                    groupCompany => {
+
+                        schedule[newKey].push(
+                            groupCompany
+                        );
+
+                    }
+                );
+
+
+                saveSchedule();
+
+                renderSchedule();
+
+                return;
+
+            }
+
+
+            /* =====================================================
+               IF FROM SIDEBAR
+
+               Add a NEW company.
+
+               Existing copies stay where they are.
+            ===================================================== */
+
+            if (
+                data.source === "sidebar"
+            ) {
+
+                if (
+                    !schedule[newKey]
+                ) {
+
+                    schedule[newKey] = [];
+
+                }
+
+
+                schedule[newKey].push(
+                    company
+                );
+
+            }
+
+
+            /* =====================================================
+               IF FROM PLANNER
+
+               Move only the selected copy.
+            ===================================================== */
+
+            else if (
+                data.source === "planner"
+            ) {
+
+                const oldKey =
+                    data.oldKey;
+
+
+                const oldIndex =
+                    data.oldIndex;
+
+
+                /*
+                 * Make sure the old location
+                 * still exists.
+                 */
+
+                if (
+                    schedule[oldKey]
+                    &&
+                    schedule[oldKey][oldIndex]
+                    !== undefined
+                ) {
+
+                    /*
+                     * Remove only this company
+                     * from the old cell.
+                     */
+
+                    schedule[oldKey].splice(
+                        oldIndex,
+                        1
+                    );
+
+
+                    /*
+                     * Remove empty array.
+                     */
+
+                    if (
+                        schedule[oldKey].length
+                        === 0
+                    ) {
+
+                        delete schedule[oldKey];
+
+                    }
+
+                }
+
+
+                /*
+                 * Add company to new cell.
+                 */
+
+                if (
+                    !schedule[newKey]
+                ) {
+
+                    schedule[newKey] = [];
+
+                }
+
+
+                schedule[newKey].push(
+                    company
+                );
+
+            }
+
+
+            saveSchedule();
+
+            renderSchedule();
+
+        }
+
+
+        /* =========================================================
+           CREATE KEY
+        ========================================================= */
+
+        function createKey(
+            day,
+            time
+        ) {
+
+            return (
+                day +
+                "_" +
+                time
+            );
+
+        }
+
+
+        /* =========================================================
+           RENDER SCHEDULE
+        ========================================================= */
+
+        function renderSchedule() {
+
+            const cells =
+                document.querySelectorAll(
+                    ".drop-zone"
+                );
+
+
+            cells.forEach(cell => {
+
+                cell.innerHTML = "";
+
+
+                const day =
+                    cell.dataset.day;
+
+
+                const time =
+                    cell.dataset.time;
+
+
+                const key =
+                    createKey(
+                        day,
+                        time
+                    );
+
+
+                const companyList =
+                    schedule[key];
+
+
+                /*
+                 * Create container
+                 * for multiple companies.
+                 */
+
+                const container =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                container.className =
+                    "companies-in-cell";
+
+
+                /*
+                 * No companies
+                 */
+
+                if (
+                    !companyList
+                    ||
+                    companyList.length === 0
+                ) {
+
+                    container.classList.add(
+                        "empty-cell"
+                    );
+
+                }
+
+
+                /*
+                 * Create each company
+                 */
+
+                if (companyList) {
+
+                    companyList.forEach(
+                        (
+                            company,
+                            index
+                        ) => {
+
+                            const companyElement =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            companyElement.className =
+                                "placed-company";
+
+
+                            companyElement.draggable =
+                                true;
+
+
+                            /*
+                             * Company name
+                             */
+
+                            const name =
+                                document.createElement(
+                                    "span"
+                                );
+
+
+                            name.className =
+                                "company-name";
+
+
+                            name.textContent =
+                                company;
+
+
+                            /*
+                             * Remove button
+                             */
+
+                            const removeButton =
+                                document.createElement(
+                                    "button"
+                                );
+
+
+                            removeButton.className =
+                                "remove-company";
+
+
+                            removeButton.textContent =
+                                "×";
+
+
+                            removeButton.title =
+                                "Remove";
+
+
+                            /*
+                             * Remove ONLY this copy.
+                             */
+
+                            removeButton.addEventListener(
+                                "click",
+                                function(event) {
+
+                                    event.stopPropagation();
+
+
+                                    if (
+                                        schedule[key]
+                                    ) {
+
+                                        schedule[key].splice(
+                                            index,
+                                            1
+                                        );
+
+
+                                        if (
+                                            schedule[key].length
+                                            === 0
+                                        ) {
+
+                                            delete schedule[key];
+
+                                        }
+
+
+                                        saveSchedule();
+
+                                        renderSchedule();
+
+                                    }
+
+                                }
+                            );
+
+
+                            /*
+                             * Add elements
+                             */
+
+                            companyElement.appendChild(
+                                name
+                            );
+
+
+                            companyElement.appendChild(
+                                removeButton
+                            );
+
+
+                            /*
+                             * Drag existing company
+                             */
+
+                            companyElement.addEventListener(
+                                "dragstart",
+                                function(event) {
+
+                                    event.dataTransfer.setData(
+
+                                        "text/plain",
+
+                                        JSON.stringify({
+
+                                            company:
+                                                company,
+
+                                            source:
+                                                "planner",
+
+                                            oldKey:
+                                                key,
+
+                                            oldIndex:
+                                                index
+
+                                        })
+
+                                    );
+
+                                }
+                            );
+
+
+                            container.appendChild(
+                                companyElement
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                cell.appendChild(
+                    container
+                );
+
+            });
+
+        }
+
+
+        /* =========================================================
+           SAVE
+        ========================================================= */
+
+        function saveSchedule() {
+
+            localStorage.setItem(
+
+                STORAGE_KEY,
+
+                JSON.stringify(
+                    schedule
+                )
+
+            );
+
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        function resetPlanner() {
+
+            const confirmed =
+                confirm(
+
+                    "Are you sure you want to clear the entire weekly schedule?"
+
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            schedule = {};
+
+
+            localStorage.removeItem(
+                STORAGE_KEY
+            );
+
+
+            renderSchedule();
+
+        }
+
+
+        /* =========================================================
+           START
+        ========================================================= */
+
+        createCompanyList();
+
+        createPlanner();
+
+    </script>
+
+</body>
+</html>
