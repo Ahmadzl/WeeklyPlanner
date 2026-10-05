@@ -29,82 +29,56 @@
             overflow-x: hidden;
         }
 
-
         /* =========================================================
            LOGIN SCREEN
            ========================================================= */
 
         .login-screen {
             min-height: 100vh;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             padding: 20px;
-
             background: #f5f6fa;
         }
 
         .login-box {
             width: 100%;
-
             max-width: 380px;
-
             background: white;
-
             border: 1px solid #ddd;
-
             border-radius: 10px;
-
             padding: 30px;
-
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
 
         .login-box h1 {
             margin: 0 0 8px 0;
-
             text-align: center;
-
             font-size: 24px;
         }
 
         .login-subtitle {
             text-align: center;
-
             color: #777;
-
             font-size: 13px;
-
             margin-bottom: 25px;
         }
 
         .login-label {
             display: block;
-
             font-size: 13px;
-
             font-weight: bold;
-
             margin-bottom: 6px;
         }
 
         .login-input {
             width: 100%;
-
             padding: 11px;
-
             border: 1px solid #ccc;
-
             border-radius: 6px;
-
             font-size: 14px;
-
             margin-bottom: 15px;
-
             outline: none;
         }
 
@@ -114,21 +88,13 @@
 
         .login-button {
             width: 100%;
-
             border: none;
-
             background: #4a44f2;
-
             color: white;
-
             padding: 11px;
-
             border-radius: 6px;
-
             cursor: pointer;
-
             font-size: 14px;
-
             font-weight: bold;
         }
 
@@ -138,21 +104,13 @@
 
         .login-error {
             display: none;
-
             background: #f8d7da;
-
             color: #842029;
-
             border: 1px solid #f5c2c7;
-
             padding: 9px;
-
             border-radius: 6px;
-
             font-size: 12px;
-
             margin-bottom: 15px;
-
             text-align: center;
         }
 
@@ -160,21 +118,18 @@
             display: block;
         }
 
-
         /* =========================================================
            APP
            ========================================================= */
 
         #app {
             display: none;
-
             min-height: 100vh;
         }
 
         #app.show {
             display: block;
         }
-
 
         /* =========================================================
            HEADER
@@ -184,13 +139,10 @@
             min-height: 70px;
             background: white;
             border-bottom: 1px solid #ddd;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             padding: 10px 20px;
-
             gap: 10px;
         }
 
@@ -209,18 +161,12 @@
 
         .unsaved {
             display: none;
-
             background: #fff3cd;
             color: #856404;
-
             border: 1px solid #ffe69c;
-
             padding: 6px 10px;
-
             border-radius: 5px;
-
             font-size: 12px;
-
             white-space: nowrap;
         }
 
@@ -240,17 +186,11 @@
         .manage-btn,
         .logout-btn {
             border: none;
-
             color: white;
-
             padding: 10px 14px;
-
             border-radius: 6px;
-
             cursor: pointer;
-
             font-weight: bold;
-
             white-space: nowrap;
         }
 
@@ -304,23 +244,17 @@
             background: #212529;
         }
 
-
         /* =========================================================
            MAIN
            ========================================================= */
 
         .main {
             display: flex;
-
             gap: 15px;
-
             padding: 15px;
-
             height: calc(100vh - 70px);
-
             min-height: 0;
         }
-
 
         /* =========================================================
            SIDEBAR
@@ -329,50 +263,34 @@
         .sidebar {
             width: 220px;
             min-width: 220px;
-
             background: white;
-
             border: 1px solid #ddd;
-
             border-radius: 8px;
-
             padding: 12px;
-
             height: calc(100vh - 100px);
-
             display: flex;
             flex-direction: column;
-
             overflow: hidden;
         }
 
         .sidebar h2 {
             margin: 0 0 10px 0;
-
             font-size: 18px;
         }
 
         .sidebar-info {
             font-size: 12px;
-
             color: #777;
-
             margin-bottom: 10px;
         }
 
         .company-list {
             display: flex;
-
             flex-direction: column;
-
             gap: 8px;
-
             overflow-y: auto;
-
             flex: 1;
-
             min-height: 0;
-
             padding-right: 5px;
         }
 
@@ -382,10 +300,8 @@
 
         .company-list::-webkit-scrollbar-thumb {
             background: #bbb;
-
             border-radius: 10px;
         }
-
 
         /* =========================================================
            COMPANY CARDS
@@ -393,22 +309,15 @@
 
         .company-card {
             background: #f2f2f2;
-
             border: 1px solid #ddd;
-
             border-radius: 6px;
-
             padding: 9px;
-
             cursor: grab;
-
             font-size: 13px;
-
             user-select: none;
-
             touch-action: manipulation;
-
             word-break: break-word;
+            transition: border 0.15s, box-shadow 0.15s;
         }
 
         .company-card:hover {
@@ -419,6 +328,12 @@
             cursor: grabbing;
         }
 
+        /* Selected company on mobile */
+        .company-card.mobile-selected {
+            border: 2px solid #4a44f2;
+            box-shadow: 0 0 0 2px rgba(74, 68, 242, 0.12);
+            background: #eef0ff;
+        }
 
         /* =========================================================
            GROUPS
@@ -426,25 +341,17 @@
 
         .company-group {
             background: #f2f2f2;
-
             border: 1px solid #ddd;
-
             border-radius: 6px;
-
             overflow: hidden;
         }
 
         .company-group-header {
             padding: 9px;
-
             cursor: grab;
-
             font-size: 13px;
-
             font-weight: bold;
-
             user-select: none;
-
             word-break: break-word;
         }
 
@@ -454,17 +361,11 @@
 
         .company-group-children {
             display: flex;
-
             flex-direction: column;
-
             gap: 6px;
-
             margin-left: 15px;
-
             margin-top: 5px;
-
             margin-bottom: 7px;
-
             margin-right: 5px;
         }
 
@@ -472,102 +373,63 @@
             border-left: 4px solid #9b9ff2;
         }
 
-
         /* =========================================================
            PLANNER
            ========================================================= */
 
         .planner {
             flex: 1;
-
             min-width: 0;
             min-height: 0;
-
             overflow: auto;
-
             background: white;
-
             border: 1px solid #ddd;
-
             border-radius: 8px;
-
             -webkit-overflow-scrolling: touch;
         }
 
         .grid {
             display: grid;
-
-            grid-template-columns:
-                70px
-                repeat(5, minmax(160px, 1fr));
-
+            grid-template-columns: 70px repeat(5, minmax(160px, 1fr));
             min-width: 870px;
         }
 
         .grid-header {
             background: #4a44f2;
-
             color: white;
-
             padding: 12px 8px;
-
             text-align: center;
-
             font-weight: bold;
-
-            border-right:
-                1px solid rgba(255,255,255,0.3);
-
+            border-right: 1px solid rgba(255,255,255,0.3);
             position: sticky;
-
             top: 0;
-
             z-index: 5;
         }
 
         .time-cell {
             background: #fafafa;
-
             border-right: 1px solid #ddd;
-
             border-bottom: 1px solid #ddd;
-
             padding: 8px;
-
             text-align: center;
-
             font-size: 12px;
-
             font-weight: bold;
-
             color: #666;
-
             min-height: 80px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
         }
 
         .drop-zone {
             min-height: 80px;
-
             border-right: 1px solid #ddd;
-
             border-bottom: 1px solid #ddd;
-
             padding: 5px;
-
             display: flex;
-
             flex-direction: column;
-
             gap: 5px;
-
             background: white;
-
             transition: background 0.15s;
         }
 
@@ -575,6 +437,11 @@
             background: #eef0ff;
         }
 
+        /* Selected drop zone on mobile */
+        .drop-zone.mobile-target {
+            background: #f1f0ff;
+            box-shadow: inset 0 0 0 2px rgba(74, 68, 242, 0.35);
+        }
 
         /* =========================================================
            PLACED COMPANIES
@@ -582,28 +449,18 @@
 
         .placed-company {
             background: #a0d1ff;
-
             border-radius: 5px;
-
             padding: 7px 8px;
-
             font-size: 12px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 5px;
-
             cursor: grab;
-
             user-select: none;
-
             min-height: 32px;
-
             touch-action: manipulation;
+            transition: border 0.15s, box-shadow 0.15s;
         }
 
         .placed-company:active {
@@ -612,33 +469,27 @@
 
         .placed-company span {
             overflow: hidden;
-
             text-overflow: ellipsis;
-
             white-space: nowrap;
-
             min-width: 0;
-
             flex: 1;
+        }
+
+        /* Selected placed company on mobile */
+        .placed-company.mobile-selected {
+            border: 2px solid #4a44f2;
+            box-shadow: 0 0 0 2px rgba(74, 68, 242, 0.12);
         }
 
         .remove-btn {
             border: none;
-
             background: transparent;
-
             color: #b00020;
-
             font-size: 18px;
-
             font-weight: bold;
-
             cursor: pointer;
-
             padding: 0 2px;
-
             line-height: 1;
-
             flex-shrink: 0;
         }
 
@@ -646,39 +497,27 @@
             color: #ff0000;
         }
 
-
         /* =========================================================
            STATUS
            ========================================================= */
 
         .status-message {
             position: fixed;
-
             bottom: 15px;
-
             left: 50%;
-
             transform: translateX(-50%);
-
             background: #333;
-
             color: white;
-
             padding: 9px 15px;
-
             border-radius: 6px;
-
             font-size: 12px;
-
             display: none;
-
-            z-index: 1000;
+            z-index: 3000;
         }
 
         .status-message.show {
             display: block;
         }
-
 
         /* =========================================================
            COMPANY MANAGEMENT MODAL
@@ -686,19 +525,12 @@
 
         .modal-overlay {
             position: fixed;
-
             inset: 0;
-
             background: rgba(0, 0, 0, 0.45);
-
             display: none;
-
             align-items: center;
-
             justify-content: center;
-
             padding: 15px;
-
             z-index: 2000;
         }
 
@@ -708,55 +540,36 @@
 
         .company-modal {
             width: 100%;
-
             max-width: 650px;
-
             max-height: 90vh;
-
             background: white;
-
             border-radius: 10px;
-
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-
             display: flex;
-
             flex-direction: column;
-
             overflow: hidden;
         }
 
         .modal-header {
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 10px;
-
             padding: 15px 18px;
-
             border-bottom: 1px solid #ddd;
         }
 
         .modal-header h2 {
             margin: 0;
-
             font-size: 20px;
         }
 
         .modal-close {
             border: none;
-
             background: transparent;
-
             font-size: 26px;
-
             cursor: pointer;
-
             color: #555;
-
             line-height: 1;
         }
 
@@ -766,34 +579,24 @@
 
         .modal-body {
             padding: 15px 18px;
-
             overflow-y: auto;
-
             flex: 1;
-
             min-height: 0;
         }
 
         .modal-actions {
             display: flex;
-
             gap: 8px;
-
             margin-bottom: 15px;
         }
 
         .add-group-btn,
         .add-company-btn {
             border: none;
-
             color: white;
-
             padding: 9px 12px;
-
             border-radius: 6px;
-
             cursor: pointer;
-
             font-weight: bold;
         }
 
@@ -807,129 +610,90 @@
 
         .management-list {
             display: flex;
-
             flex-direction: column;
-
             gap: 8px;
         }
 
         .management-group {
             border: 1px solid #ddd;
-
             border-radius: 7px;
-
             overflow: hidden;
         }
 
         .management-group-header {
             background: #f2f2f2;
-
             padding: 10px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 10px;
-
             font-weight: bold;
         }
 
         .management-group-name {
             min-width: 0;
-
             word-break: break-word;
         }
 
         .management-company {
             padding: 8px 10px 8px 25px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 10px;
-
             border-top: 1px solid #eee;
-
             background: white;
         }
 
         .management-company-name {
             min-width: 0;
-
             word-break: break-word;
-
             font-size: 13px;
         }
 
         .management-actions {
             display: flex;
-
             gap: 5px;
-
             flex-shrink: 0;
         }
 
         .edit-company-btn,
         .delete-company-btn {
             border: none;
-
             border-radius: 5px;
-
             padding: 5px 8px;
-
             cursor: pointer;
-
             font-size: 12px;
         }
 
         .edit-company-btn {
             background: #e7e5ff;
-
             color: #3934c9;
         }
 
         .delete-company-btn {
             background: #ffe2e5;
-
             color: #b00020;
         }
 
         .management-standalone {
             border: 1px solid #ddd;
-
             border-radius: 7px;
-
             padding: 10px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 10px;
-
             background: white;
         }
 
         .empty-management {
             text-align: center;
-
             color: #777;
-
             padding: 25px 10px;
-
             border: 1px dashed #ccc;
-
             border-radius: 7px;
         }
-
 
         /* =========================================================
            FORM MODAL
@@ -937,21 +701,15 @@
 
         .form-modal {
             width: 100%;
-
             max-width: 430px;
-
             background: white;
-
             border-radius: 10px;
-
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-
             padding: 18px;
         }
 
         .form-modal h3 {
             margin: 0 0 15px 0;
-
             font-size: 20px;
         }
 
@@ -961,64 +719,46 @@
 
         .form-group label {
             display: block;
-
             margin-bottom: 6px;
-
             font-size: 13px;
-
             font-weight: bold;
         }
 
         .form-group input,
         .form-group select {
             width: 100%;
-
             padding: 10px;
-
             border: 1px solid #ccc;
-
             border-radius: 6px;
-
             font-size: 14px;
-
             background: white;
         }
 
         .form-buttons {
             display: flex;
-
             justify-content: flex-end;
-
             gap: 8px;
-
             margin-top: 18px;
         }
 
         .form-cancel,
         .form-save {
             border: none;
-
             padding: 9px 14px;
-
             border-radius: 6px;
-
             cursor: pointer;
-
             font-weight: bold;
         }
 
         .form-cancel {
             background: #6c757d;
-
             color: white;
         }
 
         .form-save {
             background: #198754;
-
             color: white;
         }
-
 
         /* =========================================================
            TABLET
@@ -1028,13 +768,11 @@
 
             .main {
                 gap: 10px;
-
                 padding: 10px;
             }
 
             .sidebar {
                 width: 200px;
-
                 min-width: 200px;
             }
 
@@ -1045,9 +783,7 @@
 
                 min-width: 815px;
             }
-
         }
-
 
         /* =========================================================
            MOBILE
@@ -1057,19 +793,12 @@
 
             .header {
                 min-height: auto;
-
                 padding: 8px 10px;
-
                 flex-direction: column;
-
                 align-items: stretch;
-
                 gap: 7px;
-
                 position: sticky;
-
                 top: 0;
-
                 z-index: 20;
             }
 
@@ -1083,16 +812,12 @@
 
             .unsaved {
                 font-size: 10px;
-
                 padding: 5px 7px;
             }
 
             .header-buttons {
                 display: grid;
-
-                grid-template-columns:
-                    1fr 1fr 1fr 1fr 1fr;
-
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
                 width: 100%;
             }
 
@@ -1102,97 +827,67 @@
             .manage-btn,
             .logout-btn {
                 width: 100%;
-
                 padding: 8px 4px;
-
                 font-size: 9px;
             }
 
             .main {
                 display: flex;
-
                 flex-direction: column;
-
                 height: auto;
-
                 min-height: calc(100vh - 115px);
-
                 padding: 10px;
-
                 gap: 10px;
             }
 
             .sidebar {
                 width: 100%;
-
                 min-width: 0;
-
                 height: 220px;
-
                 min-height: 220px;
-
                 border-radius: 8px;
-
                 padding: 10px;
             }
 
             .sidebar h2 {
                 font-size: 17px;
-
                 margin-bottom: 6px;
             }
 
             .sidebar-info {
                 font-size: 11px;
-
                 margin-bottom: 7px;
             }
 
             .company-list {
                 gap: 6px;
-
                 overflow-y: auto;
-
                 -webkit-overflow-scrolling: touch;
             }
 
             .company-card {
                 padding: 10px;
-
                 font-size: 13px;
-
                 min-height: 38px;
-
                 display: flex;
-
                 align-items: center;
             }
 
             .company-group-header {
                 padding: 10px;
-
                 font-size: 13px;
-
                 min-height: 38px;
-
                 display: flex;
-
                 align-items: center;
             }
 
             .planner {
                 width: 100%;
-
                 height: calc(100vh - 345px);
-
                 min-height: 400px;
-
                 overflow-x: auto;
-
                 overflow-y: auto;
-
                 border-radius: 8px;
-
                 -webkit-overflow-scrolling: touch;
             }
 
@@ -1206,51 +901,34 @@
 
             .grid-header {
                 padding: 10px 5px;
-
                 font-size: 12px;
-
                 min-height: 42px;
-
                 display: flex;
-
                 align-items: center;
-
                 justify-content: center;
-
                 position: sticky;
-
                 top: 0;
-
                 z-index: 5;
             }
 
             .time-cell {
                 min-height: 70px;
-
                 padding: 5px;
-
                 font-size: 11px;
-
                 position: sticky;
-
                 left: 0;
-
                 z-index: 3;
             }
 
             .drop-zone {
                 min-height: 70px;
-
                 padding: 4px;
-
                 gap: 4px;
             }
 
             .placed-company {
                 padding: 7px 6px;
-
                 font-size: 11px;
-
                 min-height: 31px;
             }
 
@@ -1276,7 +954,6 @@
 
             .modal-actions {
                 display: grid;
-
                 grid-template-columns: 1fr 1fr;
             }
 
@@ -1284,9 +961,7 @@
             .add-company-btn {
                 width: 100%;
             }
-
         }
-
 
         /* =========================================================
            VERY SMALL MOBILE
@@ -1304,13 +979,11 @@
 
             .sidebar {
                 height: 200px;
-
                 min-height: 200px;
             }
 
             .planner {
                 height: calc(100vh - 325px);
-
                 min-height: 380px;
             }
 
@@ -1329,22 +1002,17 @@
             .time-cell {
                 font-size: 10px;
             }
-
         }
-
     </style>
 </head>
 
 <body>
 
-
     <!-- =========================================================
          LOGIN SCREEN
          ========================================================= -->
 
-    <div
-        id="loginScreen"
-        class="login-screen">
+    <div id="loginScreen" class="login-screen">
 
         <div class="login-box">
 
@@ -1356,22 +1024,12 @@
                 Please sign in to continue
             </div>
 
-
-            <div
-                id="loginError"
-                class="login-error">
-
+            <div id="loginError" class="login-error">
                 Invalid username or password.
-
             </div>
 
-
-            <label
-                class="login-label"
-                for="usernameInput">
-
+            <label class="login-label" for="usernameInput">
                 Username
-
             </label>
 
             <input
@@ -1381,13 +1039,8 @@
                 autocomplete="username"
                 placeholder="Username">
 
-
-            <label
-                class="login-label"
-                for="passwordInput">
-
+            <label class="login-label" for="passwordInput">
                 Password
-
             </label>
 
             <input
@@ -1396,7 +1049,6 @@
                 type="password"
                 autocomplete="current-password"
                 placeholder="Password">
-
 
             <button
                 class="login-button"
@@ -1417,10 +1069,7 @@
 
     <div id="app">
 
-
-        <!-- =====================================================
-             HEADER
-             ===================================================== -->
+        <!-- HEADER -->
 
         <div class="header">
 
@@ -1440,7 +1089,6 @@
 
             </div>
 
-
             <div class="header-buttons">
 
                 <button
@@ -1450,7 +1098,6 @@
                     Manage Companies
 
                 </button>
-
 
                 <button
                     id="saveButton"
@@ -1462,7 +1109,6 @@
 
                 </button>
 
-
                 <button
                     id="discardButton"
                     class="discard-btn"
@@ -1473,7 +1119,6 @@
 
                 </button>
 
-
                 <button
                     class="reset-btn"
                     onclick="resetPlanner()">
@@ -1481,7 +1126,6 @@
                     Reset
 
                 </button>
-
 
                 <button
                     class="logout-btn"
@@ -1496,9 +1140,7 @@
         </div>
 
 
-        <!-- =====================================================
-             MAIN
-             ===================================================== -->
+        <!-- MAIN -->
 
         <div class="main">
 
@@ -1511,7 +1153,7 @@
                 </h2>
 
                 <div class="sidebar-info">
-                    Drag a company or a group to a day and time.
+                    Desktop: drag a company. Mobile: tap a company, then tap a day/time.
                 </div>
 
                 <div
@@ -1536,9 +1178,7 @@
         </div>
 
 
-        <!-- =====================================================
-             COMPANY MANAGEMENT MODAL
-             ===================================================== -->
+        <!-- COMPANY MANAGEMENT MODAL -->
 
         <div
             id="companyManagerModal"
@@ -1562,7 +1202,6 @@
 
                 </div>
 
-
                 <div class="modal-body">
 
                     <div class="modal-actions">
@@ -1575,7 +1214,6 @@
 
                         </button>
 
-
                         <button
                             class="add-company-btn"
                             onclick="openCompanyForm()">
@@ -1585,7 +1223,6 @@
                         </button>
 
                     </div>
-
 
                     <div
                         id="managementList"
@@ -1599,9 +1236,7 @@
         </div>
 
 
-        <!-- =====================================================
-             FORM MODAL
-             ===================================================== -->
+        <!-- FORM MODAL -->
 
         <div
             id="formModal"
@@ -1612,7 +1247,6 @@
                 <h3 id="formTitle">
                     Add Company
                 </h3>
-
 
                 <div class="form-group">
 
@@ -1626,7 +1260,6 @@
                         autocomplete="off">
 
                 </div>
-
 
                 <div
                     id="groupSelectContainer"
@@ -1646,7 +1279,6 @@
 
                 </div>
 
-
                 <div class="form-buttons">
 
                     <button
@@ -1656,7 +1288,6 @@
                         Cancel
 
                     </button>
-
 
                     <button
                         id="formSaveButton"
@@ -1727,11 +1358,9 @@
                     "true"
                 );
 
-
                 error.classList.remove(
                     "show"
                 );
-
 
                 showApp();
 
@@ -1892,6 +1521,16 @@
 
         let editingIsGroup = false;
 
+        /*
+         * Mobile selection.
+         *
+         * source:
+         * - sidebar
+         * - group
+         * - existing
+         */
+        let mobileSelection = null;
+
 
         /* =========================================================
            START
@@ -1915,6 +1554,511 @@
 
             }
         );
+
+
+        /* =========================================================
+           MOBILE SELECTION HELPERS
+           ========================================================= */
+
+        function clearMobileSelection() {
+
+            mobileSelection = null;
+
+            document
+                .querySelectorAll(
+                    ".mobile-selected"
+                )
+                .forEach(element => {
+
+                    element.classList.remove(
+                        "mobile-selected"
+                    );
+
+                });
+
+
+            document
+                .querySelectorAll(
+                    ".mobile-target"
+                )
+                .forEach(element => {
+
+                    element.classList.remove(
+                        "mobile-target"
+                    );
+
+                });
+
+        }
+
+
+        function selectMobileCompany(
+            companyName,
+            element
+        ) {
+
+            clearMobileSelection();
+
+
+            mobileSelection = {
+                source: "sidebar",
+                company: companyName
+            };
+
+
+            if (element) {
+
+                element.classList.add(
+                    "mobile-selected"
+                );
+
+            }
+
+
+            showStatus(
+                "Company selected. Tap a day and time."
+            );
+
+        }
+
+
+        function selectMobileExisting(
+            key,
+            index,
+            element
+        ) {
+
+            clearMobileSelection();
+
+
+            mobileSelection = {
+                source: "existing",
+                key: key,
+                index: index
+            };
+
+
+            if (element) {
+
+                element.classList.add(
+                    "mobile-selected"
+                );
+
+            }
+
+
+            showStatus(
+                "Company selected. Tap a new day and time."
+            );
+
+        }
+
+
+        /* =========================================================
+           CHECK COMPANY IN DAY
+           ========================================================= */
+
+        function companyExistsOnDay(
+            companyName,
+            day,
+            ignoreKey = null,
+            ignoreIndex = null
+        ) {
+
+            const dayPrefix =
+                day + "_";
+
+
+            for (
+                const key of Object.keys(schedule)
+            ) {
+
+                if (
+                    !key.startsWith(dayPrefix)
+                ) {
+                    continue;
+                }
+
+
+                if (!schedule[key]) {
+                    continue;
+                }
+
+
+                for (
+                    let index = 0;
+                    index < schedule[key].length;
+                    index++
+                ) {
+
+                    if (
+                        key === ignoreKey &&
+                        index === ignoreIndex
+                    ) {
+                        continue;
+                    }
+
+
+                    if (
+                        schedule[key][index] ===
+                        companyName
+                    ) {
+
+                        return true;
+
+                    }
+
+                }
+
+            }
+
+
+            return false;
+
+        }
+
+
+        /* =========================================================
+           GET DAY FROM KEY
+           ========================================================= */
+
+        function getDayFromKey(key) {
+
+            const separator =
+                key.lastIndexOf("_");
+
+
+            return key.substring(
+                0,
+                separator
+            );
+
+        }
+
+
+        /* =========================================================
+           HANDLE MOBILE PLACEMENT
+           ========================================================= */
+
+        function handleMobilePlacement(
+            day,
+            time
+        ) {
+
+            if (!mobileSelection) {
+
+                showStatus(
+                    "Select a company first."
+                );
+
+                return;
+
+            }
+
+
+            const key =
+                createKey(
+                    day,
+                    time
+                );
+
+
+            /* =====================================================
+               MOVE EXISTING COMPANY
+               ===================================================== */
+
+            if (
+                mobileSelection.source ===
+                "existing"
+            ) {
+
+                const oldKey =
+                    mobileSelection.key;
+
+                const oldIndex =
+                    mobileSelection.index;
+
+
+                if (!schedule[oldKey]) {
+
+                    clearMobileSelection();
+
+                    return;
+
+                }
+
+
+                const company =
+                    schedule[oldKey][oldIndex];
+
+
+                if (company === undefined) {
+
+                    clearMobileSelection();
+
+                    return;
+
+                }
+
+
+                /* Clicking the same position */
+
+                if (
+                    oldKey === key
+                ) {
+
+                    clearMobileSelection();
+
+                    showStatus(
+                        "Company is already here."
+                    );
+
+                    renderSchedule();
+
+                    return;
+
+                }
+
+
+                /*
+                 * Do not allow the same company twice
+                 * on the target day.
+                 */
+                if (
+                    companyExistsOnDay(
+                        company,
+                        day,
+                        oldKey,
+                        oldIndex
+                    )
+                ) {
+
+                    clearMobileSelection();
+
+                    showStatus(
+                        company +
+                        " is already scheduled for " +
+                        day +
+                        "."
+                    );
+
+                    renderSchedule();
+
+                    return;
+
+                }
+
+
+                schedule[oldKey].splice(
+                    oldIndex,
+                    1
+                );
+
+
+                if (
+                    schedule[oldKey].length === 0
+                ) {
+
+                    delete schedule[oldKey];
+
+                }
+
+
+                if (!schedule[key]) {
+
+                    schedule[key] = [];
+
+                }
+
+
+                schedule[key].push(
+                    company
+                );
+
+
+                clearMobileSelection();
+
+                markAsChanged();
+
+                renderSchedule();
+
+                return;
+
+            }
+
+
+            /* =====================================================
+               ADD SINGLE COMPANY
+               ===================================================== */
+
+            if (
+                mobileSelection.source ===
+                "sidebar"
+            ) {
+
+                const company =
+                    mobileSelection.company;
+
+
+                if (
+                    companyExistsOnDay(
+                        company,
+                        day
+                    )
+                ) {
+
+                    clearMobileSelection();
+
+                    showStatus(
+                        company +
+                        " is already scheduled for " +
+                        day +
+                        "."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!schedule[key]) {
+
+                    schedule[key] = [];
+
+                }
+
+
+                schedule[key].push(
+                    company
+                );
+
+
+                clearMobileSelection();
+
+                markAsChanged();
+
+                renderSchedule();
+
+                return;
+
+            }
+
+
+            /* =====================================================
+               ADD GROUP
+               ===================================================== */
+
+            if (
+                mobileSelection.source ===
+                "group"
+            ) {
+
+                const groupCompanies =
+                    mobileSelection.companies || [];
+
+
+                if (
+                    groupCompanies.length === 0
+                ) {
+
+                    clearMobileSelection();
+
+                    showStatus(
+                        "This group has no companies."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!schedule[key]) {
+
+                    schedule[key] = [];
+
+                }
+
+
+                let addedCount = 0;
+
+                let skippedCount = 0;
+
+
+                groupCompanies.forEach(
+                    company => {
+
+                        if (
+                            companyExistsOnDay(
+                                company,
+                                day
+                            )
+                        ) {
+
+                            skippedCount++;
+
+                            return;
+
+                        }
+
+
+                        schedule[key].push(
+                            company
+                        );
+
+                        addedCount++;
+
+                    }
+                );
+
+
+                clearMobileSelection();
+
+
+                if (addedCount > 0) {
+
+                    markAsChanged();
+
+                    renderSchedule();
+
+                }
+
+
+                if (
+                    addedCount === 0 &&
+                    skippedCount > 0
+                ) {
+
+                    showStatus(
+                        "All companies in this group are already scheduled for " +
+                        day +
+                        "."
+                    );
+
+                }
+                else if (
+                    skippedCount > 0
+                ) {
+
+                    showStatus(
+                        addedCount +
+                        " company/companies added. " +
+                        skippedCount +
+                        " already existed on " +
+                        day +
+                        "."
+                    );
+
+                }
+
+
+                return;
+
+            }
+
+
+            clearMobileSelection();
+
+        }
 
 
         /* =========================================================
@@ -2043,7 +2187,7 @@
                     "none";
 
 
-                /* Group drag */
+                /* Group drag - desktop */
 
                 header.addEventListener(
                     "dragstart",
@@ -2115,6 +2259,8 @@
                         childCard.draggable = true;
 
 
+                        /* Desktop drag */
+
                         childCard.addEventListener(
                             "dragstart",
                             function () {
@@ -2123,6 +2269,33 @@
                                     source: "sidebar",
                                     company: child.name
                                 };
+
+                            }
+                        );
+
+
+                        /* Mobile tap */
+
+                        childCard.addEventListener(
+                            "click",
+                            function (event) {
+
+                                /*
+                                 * Ignore click caused by
+                                 * dragging on desktop.
+                                 */
+                                if (
+                                    window.innerWidth <= 700
+                                ) {
+
+                                    event.preventDefault();
+
+                                    selectMobileCompany(
+                                        child.name,
+                                        childCard
+                                    );
+
+                                }
 
                             }
                         );
@@ -2162,6 +2335,8 @@
                 card.draggable = true;
 
 
+                /* Desktop drag */
+
                 card.addEventListener(
                     "dragstart",
                     function () {
@@ -2170,6 +2345,29 @@
                             source: "sidebar",
                             company: company.name
                         };
+
+                    }
+                );
+
+
+                /* Mobile tap */
+
+                card.addEventListener(
+                    "click",
+                    function (event) {
+
+                        if (
+                            window.innerWidth <= 700
+                        ) {
+
+                            event.preventDefault();
+
+                            selectMobileCompany(
+                                company.name,
+                                card
+                            );
+
+                        }
 
                     }
                 );
@@ -2287,6 +2485,8 @@
                         time;
 
 
+                    /* Desktop drag over */
+
                     zone.addEventListener(
                         "dragover",
                         function (event) {
@@ -2313,6 +2513,8 @@
                     );
 
 
+                    /* Desktop drop */
+
                     zone.addEventListener(
                         "drop",
                         function (event) {
@@ -2332,6 +2534,27 @@
                     );
 
 
+                    /* Mobile tap */
+
+                    zone.addEventListener(
+                        "click",
+                        function () {
+
+                            if (
+                                window.innerWidth <= 700
+                            ) {
+
+                                handleMobilePlacement(
+                                    day,
+                                    time
+                                );
+
+                            }
+
+                        }
+                    );
+
+
                     grid.appendChild(zone);
 
                 });
@@ -2345,7 +2568,7 @@
 
 
         /* =========================================================
-           HANDLE DROP
+           HANDLE DROP - DESKTOP
            ========================================================= */
 
         function handleDrop(day, time) {
@@ -2385,6 +2608,51 @@
                     draggedExisting = null;
 
                     return;
+                }
+
+
+                /*
+                 * If moving to another day, make sure
+                 * the company does not already exist there.
+                 */
+                const oldDay =
+                    getDayFromKey(oldKey);
+
+
+                if (
+                    oldDay !== day &&
+                    companyExistsOnDay(
+                        company,
+                        day,
+                        oldKey,
+                        oldIndex
+                    )
+                ) {
+
+                    draggedExisting = null;
+
+                    showStatus(
+                        company +
+                        " is already scheduled for " +
+                        day +
+                        "."
+                    );
+
+                    return;
+
+                }
+
+
+                /* Same position */
+
+                if (
+                    oldKey === key
+                ) {
+
+                    draggedExisting = null;
+
+                    return;
+
                 }
 
 
@@ -2460,12 +2728,37 @@
                 }
 
 
+                let addedCount = 0;
+
+                let skippedCount = 0;
+
+
                 draggedData.companies.forEach(
                     company => {
+
+                        /*
+                         * Do not add the same company
+                         * twice on the same day.
+                         */
+                        if (
+                            companyExistsOnDay(
+                                company,
+                                day
+                            )
+                        ) {
+
+                            skippedCount++;
+
+                            return;
+
+                        }
+
 
                         schedule[key].push(
                             company
                         );
+
+                        addedCount++;
 
                     }
                 );
@@ -2473,9 +2766,43 @@
 
                 draggedData = null;
 
-                markAsChanged();
 
-                renderSchedule();
+                if (addedCount > 0) {
+
+                    markAsChanged();
+
+                    renderSchedule();
+
+                }
+
+
+                if (
+                    addedCount === 0 &&
+                    skippedCount > 0
+                ) {
+
+                    showStatus(
+                        "All companies in this group are already scheduled for " +
+                        day +
+                        "."
+                    );
+
+                }
+                else if (
+                    skippedCount > 0
+                ) {
+
+                    showStatus(
+                        addedCount +
+                        " company/companies added. " +
+                        skippedCount +
+                        " already existed on " +
+                        day +
+                        "."
+                    );
+
+                }
+
 
                 return;
             }
@@ -2488,6 +2815,35 @@
                 "sidebar"
             ) {
 
+                const company =
+                    draggedData.company;
+
+
+                /*
+                 * Do not allow same company twice
+                 * on the same day.
+                 */
+                if (
+                    companyExistsOnDay(
+                        company,
+                        day
+                    )
+                ) {
+
+                    draggedData = null;
+
+                    showStatus(
+                        company +
+                        " is already scheduled for " +
+                        day +
+                        "."
+                    );
+
+                    return;
+
+                }
+
+
                 if (!schedule[key]) {
 
                     schedule[key] = [];
@@ -2496,7 +2852,7 @@
 
 
                 schedule[key].push(
-                    draggedData.company
+                    company
                 );
 
 
@@ -2626,6 +2982,8 @@
                             item.appendChild(remove);
 
 
+                            /* Desktop drag */
+
                             item.addEventListener(
                                 "dragstart",
                                 function () {
@@ -2646,6 +3004,32 @@
                                 function () {
 
                                     draggedExisting = null;
+
+                                }
+                            );
+
+
+                            /* Mobile tap */
+
+                            item.addEventListener(
+                                "click",
+                                function (event) {
+
+                                    if (
+                                        window.innerWidth <= 700
+                                    ) {
+
+                                        event.stopPropagation();
+
+                                        event.preventDefault();
+
+                                        selectMobileExisting(
+                                            key,
+                                            index,
+                                            item
+                                        );
+
+                                    }
 
                                 }
                             );
@@ -2689,6 +3073,8 @@
 
             }
 
+
+            clearMobileSelection();
 
             markAsChanged();
 
@@ -2816,9 +3202,22 @@
                     }
 
 
-                    schedule[key].push(
-                        row.company
-                    );
+                    /*
+                     * Prevent old duplicate data from
+                     * appearing twice on the same day.
+                     */
+                    if (
+                        !companyExistsOnDay(
+                            row.company,
+                            row.day
+                        )
+                    ) {
+
+                        schedule[key].push(
+                            row.company
+                        );
+
+                    }
 
                 });
 
@@ -3036,6 +3435,7 @@
 
             hasUnsavedChanges = false;
 
+            clearMobileSelection();
 
             renderSchedule();
 
@@ -3068,6 +3468,7 @@
 
             schedule = {};
 
+            clearMobileSelection();
 
             markAsChanged();
 
@@ -3787,9 +4188,7 @@
 
             try {
 
-                /* =================================================
-                   GROUP
-                   ================================================= */
+                /* GROUP */
 
                 if (editingIsGroup) {
 
@@ -3879,9 +4278,7 @@
                 }
 
 
-                /* =================================================
-                   COMPANY
-                   ================================================= */
+                /* COMPANY */
 
                 const groupSelect =
                     document.getElementById(
@@ -4169,6 +4566,8 @@
 
                 hasUnsavedChanges = false;
 
+                clearMobileSelection();
+
                 updateButtons();
 
                 createCompanyList();
@@ -4331,6 +4730,8 @@
 
 
                 hasUnsavedChanges = false;
+
+                clearMobileSelection();
 
                 updateButtons();
 
