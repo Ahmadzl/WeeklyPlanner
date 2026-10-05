@@ -89,7 +89,8 @@
 
         .save-btn,
         .discard-btn,
-        .reset-btn {
+        .reset-btn,
+        .manage-btn {
             border: none;
 
             color: white;
@@ -137,6 +138,14 @@
 
         .reset-btn:hover {
             background: #bb2d3b;
+        }
+
+        .manage-btn {
+            background: #4a44f2;
+        }
+
+        .manage-btn:hover {
+            background: #3934c9;
         }
 
 
@@ -516,6 +525,346 @@
 
 
         /* =========================================================
+           COMPANY MANAGEMENT MODAL
+           ========================================================= */
+
+        .modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.45);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 15px;
+
+            z-index: 2000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .company-modal {
+            width: 100%;
+
+            max-width: 650px;
+
+            max-height: 90vh;
+
+            background: white;
+
+            border-radius: 10px;
+
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow: hidden;
+        }
+
+        .modal-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            padding: 15px 18px;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+
+            font-size: 20px;
+        }
+
+        .modal-close {
+            border: none;
+
+            background: transparent;
+
+            font-size: 26px;
+
+            cursor: pointer;
+
+            color: #555;
+
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #000;
+        }
+
+        .modal-body {
+            padding: 15px 18px;
+
+            overflow-y: auto;
+
+            flex: 1;
+
+            min-height: 0;
+        }
+
+        .modal-actions {
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 15px;
+        }
+
+        .add-group-btn,
+        .add-company-btn {
+            border: none;
+
+            color: white;
+
+            padding: 9px 12px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .add-group-btn {
+            background: #4a44f2;
+        }
+
+        .add-company-btn {
+            background: #198754;
+        }
+
+        .management-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .management-group {
+            border: 1px solid #ddd;
+
+            border-radius: 7px;
+
+            overflow: hidden;
+        }
+
+        .management-group-header {
+            background: #f2f2f2;
+
+            padding: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            font-weight: bold;
+        }
+
+        .management-group-name {
+            min-width: 0;
+
+            word-break: break-word;
+        }
+
+        .management-company {
+            padding: 8px 10px 8px 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            border-top: 1px solid #eee;
+
+            background: white;
+        }
+
+        .management-company-name {
+            min-width: 0;
+
+            word-break: break-word;
+
+            font-size: 13px;
+        }
+
+        .management-actions {
+            display: flex;
+
+            gap: 5px;
+
+            flex-shrink: 0;
+        }
+
+        .edit-company-btn,
+        .delete-company-btn {
+            border: none;
+
+            border-radius: 5px;
+
+            padding: 5px 8px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+        .edit-company-btn {
+            background: #e7e5ff;
+
+            color: #3934c9;
+        }
+
+        .delete-company-btn {
+            background: #ffe2e5;
+
+            color: #b00020;
+        }
+
+        .management-standalone {
+            border: 1px solid #ddd;
+
+            border-radius: 7px;
+
+            padding: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            background: white;
+        }
+
+        .empty-management {
+            text-align: center;
+
+            color: #777;
+
+            padding: 25px 10px;
+
+            border: 1px dashed #ccc;
+
+            border-radius: 7px;
+        }
+
+
+        /* =========================================================
+           FORM MODAL
+           ========================================================= */
+
+        .form-modal {
+            width: 100%;
+
+            max-width: 430px;
+
+            background: white;
+
+            border-radius: 10px;
+
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+
+            padding: 18px;
+        }
+
+        .form-modal h3 {
+            margin: 0 0 15px 0;
+
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+
+            padding: 10px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 14px;
+
+            background: white;
+        }
+
+        .form-buttons {
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            margin-top: 18px;
+        }
+
+        .form-cancel,
+        .form-save {
+            border: none;
+
+            padding: 9px 14px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .form-cancel {
+            background: #6c757d;
+
+            color: white;
+        }
+
+        .form-save {
+            background: #198754;
+
+            color: white;
+        }
+
+
+        /* =========================================================
            TABLET
            ========================================================= */
 
@@ -586,21 +935,21 @@
                 display: grid;
 
                 grid-template-columns:
-                    1fr 1fr 1fr;
+                    1fr 1fr 1fr 1fr;
 
                 width: 100%;
             }
 
             .save-btn,
             .discard-btn,
-            .reset-btn {
+            .reset-btn,
+            .manage-btn {
                 width: 100%;
 
                 padding: 8px 5px;
 
-                font-size: 11px;
+                font-size: 10px;
             }
-
 
             .main {
                 display: flex;
@@ -615,7 +964,6 @@
 
                 gap: 10px;
             }
-
 
             .sidebar {
                 width: 100%;
@@ -674,7 +1022,6 @@
 
                 align-items: center;
             }
-
 
             .planner {
                 width: 100%;
@@ -752,6 +1099,33 @@
 
             .remove-btn {
                 font-size: 17px;
+            }
+
+            .modal-overlay {
+                padding: 8px;
+            }
+
+            .company-modal {
+                max-height: 94vh;
+            }
+
+            .modal-header {
+                padding: 12px;
+            }
+
+            .modal-body {
+                padding: 12px;
+            }
+
+            .modal-actions {
+                display: grid;
+
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .add-group-btn,
+            .add-company-btn {
+                width: 100%;
             }
 
         }
@@ -832,6 +1206,15 @@
         <div class="header-buttons">
 
             <button
+                class="manage-btn"
+                onclick="openCompanyManager()">
+
+                Manage Companies
+
+            </button>
+
+
+            <button
                 id="saveButton"
                 class="save-btn"
                 onclick="saveChanges()"
@@ -872,7 +1255,6 @@
 
     <div class="main">
 
-
         <!-- SIDEBAR -->
 
         <aside class="sidebar">
@@ -907,6 +1289,144 @@
     </div>
 
 
+    <!-- =========================================================
+         COMPANY MANAGEMENT MODAL
+         ========================================================= -->
+
+    <div
+        id="companyManagerModal"
+        class="modal-overlay">
+
+        <div class="company-modal">
+
+            <div class="modal-header">
+
+                <h2>
+                    Manage Companies
+                </h2>
+
+                <button
+                    class="modal-close"
+                    onclick="closeCompanyManager()">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="modal-actions">
+
+                    <button
+                        class="add-group-btn"
+                        onclick="openGroupForm()">
+
+                        + Add Group
+
+                    </button>
+
+
+                    <button
+                        class="add-company-btn"
+                        onclick="openCompanyForm()">
+
+                        + Add Company
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="managementList"
+                    class="management-list">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         FORM MODAL
+         ========================================================= -->
+
+    <div
+        id="formModal"
+        class="modal-overlay">
+
+        <div class="form-modal">
+
+            <h3 id="formTitle">
+                Add Company
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="nameInput">
+                    Name
+                </label>
+
+                <input
+                    id="nameInput"
+                    type="text"
+                    autocomplete="off">
+
+            </div>
+
+
+            <div
+                id="groupSelectContainer"
+                class="form-group">
+
+                <label for="groupSelect">
+                    Group
+                </label>
+
+                <select id="groupSelect">
+
+                    <option value="">
+                        No Group
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-buttons">
+
+                <button
+                    class="form-cancel"
+                    onclick="closeFormModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    id="formSaveButton"
+                    class="form-save"
+                    onclick="saveCompanyForm()">
+
+                    Add
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
     <!-- STATUS -->
 
     <div
@@ -932,70 +1452,6 @@
                 SUPABASE_URL,
                 SUPABASE_PUBLISHABLE_KEY
             );
-
-
-        /* =========================================================
-           COMPANIES
-           ========================================================= */
-
-         const companies = [
-
-        {
-                name: "Danmark",
-                children: [
-                    "XL MØBLER ApS",
-                    "Fårup Furniture (Møbelkompagniet)",
-                    "BOBO ApS",
-                    "BFT",
-                    "Stenløse Havemøbelcenter",
-                    "Salesstyling Aps",
-                    "Other"
-                ]
-            },
-
-            {
-                name: "Furniture1 Hungary",
-                children: [
-                    "Croatia",
-                    "Romania",
-                    "Bulgarien",
-                    "Hungary",
-                    "Slovenia"
-                ]
-            },
-
-            {
-                name: "Furniture1 Lithuania",
-                children: [
-                    "EStonia",
-                    "Lithuania",
-                    "Latvia"
-                ]
-            },
-
-            {       
-                name: "Furniture1 Germany",
-                children: [
-                    "United Kingdom",
-                    "Ireland",
-                    "Netherlands"
-                ]
-            },
-
-            "AKL TRADE OÜ",
-            "PK Invest ApS",
-            "SELSEY Sp. z o.o.",
-
-            
-
-            "Sohome b.v.",
-            "CONDI SERVICES",
-            "Otto Group",
-
-            "Skeidar Holding AS",
-            "Ellos NO"
-
-        ];
 
 
         /* =========================================================
@@ -1033,6 +1489,8 @@
            VARIABLES
            ========================================================= */
 
+        let companies = [];
+
         let schedule = {};
 
         let savedSchedule = {};
@@ -1043,6 +1501,10 @@
 
         let draggedExisting = null;
 
+        let editingCompanyId = null;
+
+        let editingIsGroup = false;
+
 
         /* =========================================================
            START
@@ -1052,14 +1514,79 @@
             "DOMContentLoaded",
             async function () {
 
-                createCompanyList();
-
                 createPlanner();
+
+                await loadCompanies();
 
                 await loadSchedule();
 
             }
         );
+
+
+        /* =========================================================
+           LOAD COMPANIES
+           ========================================================= */
+
+        async function loadCompanies() {
+
+            try {
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient
+                    .from("companies")
+                    .select(
+                        "id, name, group_id, is_group"
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: true
+                        }
+                    );
+
+
+                if (error) {
+
+                    console.error(
+                        "Company load error:",
+                        error
+                    );
+
+                    showStatus(
+                        "Could not load companies."
+                    );
+
+                    companies = [];
+
+                    createCompanyList();
+
+                    return;
+                }
+
+
+                companies = data || [];
+
+                createCompanyList();
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                companies = [];
+
+                createCompanyList();
+
+                showStatus(
+                    "An error occurred while loading companies."
+                );
+
+            }
+
+        }
 
 
         /* =========================================================
@@ -1076,45 +1603,23 @@
             container.innerHTML = "";
 
 
-            companies.forEach(item => {
+            const groups =
+                companies.filter(
+                    item => item.is_group
+                );
 
 
-                /* SINGLE COMPANY */
-
-                if (typeof item === "string") {
-
-                    const card =
-                        document.createElement("div");
-
-                    card.className =
-                        "company-card";
-
-                    card.textContent =
-                        item;
-
-                    card.draggable = true;
+            const standalone =
+                companies.filter(
+                    item =>
+                        !item.is_group &&
+                        !item.group_id
+                );
 
 
-                    card.addEventListener(
-                        "dragstart",
-                        function () {
+            /* GROUPS */
 
-                            draggedData = {
-                                source: "sidebar",
-                                company: item
-                            };
-
-                        }
-                    );
-
-
-                    container.appendChild(card);
-
-                    return;
-                }
-
-
-                /* GROUP */
+            groups.forEach(groupItem => {
 
                 const group =
                     document.createElement("div");
@@ -1130,7 +1635,7 @@
                     "company-group-header";
 
                 header.textContent =
-                    "▶ " + item.name;
+                    "▶ " + groupItem.name;
 
                 header.draggable = true;
 
@@ -1151,9 +1656,21 @@
                     "dragstart",
                     function () {
 
+                        const children =
+                            companies
+                                .filter(
+                                    item =>
+                                        !item.is_group &&
+                                        item.group_id === groupItem.id
+                                )
+                                .map(
+                                    item => item.name
+                                );
+
+
                         draggedData = {
                             source: "group",
-                            companies: item.children
+                            companies: children
                         };
 
                     }
@@ -1177,7 +1694,7 @@
 
                         header.textContent =
                             (hidden ? "▼ " : "▶ ")
-                            + item.name;
+                            + groupItem.name;
 
                     }
                 );
@@ -1185,38 +1702,44 @@
 
                 /* Children */
 
-                item.children.forEach(child => {
+                companies
+                    .filter(
+                        item =>
+                            !item.is_group &&
+                            item.group_id === groupItem.id
+                    )
+                    .forEach(child => {
 
-                    const childCard =
-                        document.createElement("div");
+                        const childCard =
+                            document.createElement("div");
 
-                    childCard.className =
-                        "company-card";
+                        childCard.className =
+                            "company-card";
 
-                    childCard.textContent =
-                        child;
+                        childCard.textContent =
+                            child.name;
 
-                    childCard.draggable = true;
-
-
-                    childCard.addEventListener(
-                        "dragstart",
-                        function () {
-
-                            draggedData = {
-                                source: "sidebar",
-                                company: child
-                            };
-
-                        }
-                    );
+                        childCard.draggable = true;
 
 
-                    childrenContainer.appendChild(
-                        childCard
-                    );
+                        childCard.addEventListener(
+                            "dragstart",
+                            function () {
 
-                });
+                                draggedData = {
+                                    source: "sidebar",
+                                    company: child.name
+                                };
+
+                            }
+                        );
+
+
+                        childrenContainer.appendChild(
+                            childCard
+                        );
+
+                    });
 
 
                 group.appendChild(header);
@@ -1228,6 +1751,68 @@
                 container.appendChild(group);
 
             });
+
+
+            /* STANDALONE COMPANIES */
+
+            standalone.forEach(company => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "company-card";
+
+                card.textContent =
+                    company.name;
+
+                card.draggable = true;
+
+
+                card.addEventListener(
+                    "dragstart",
+                    function () {
+
+                        draggedData = {
+                            source: "sidebar",
+                            company: company.name
+                        };
+
+                    }
+                );
+
+
+                container.appendChild(card);
+
+            });
+
+
+            if (
+                groups.length === 0 &&
+                standalone.length === 0
+            ) {
+
+                const empty =
+                    document.createElement("div");
+
+                empty.style.color =
+                    "#777";
+
+                empty.style.fontSize =
+                    "12px";
+
+                empty.style.textAlign =
+                    "center";
+
+                empty.style.padding =
+                    "20px 5px";
+
+                empty.textContent =
+                    "No companies added yet.";
+
+                container.appendChild(empty);
+
+            }
 
         }
 
@@ -1439,7 +2024,6 @@
 
                 draggedExisting = null;
 
-
                 markAsChanged();
 
                 renderSchedule();
@@ -1462,6 +2046,20 @@
                 "group"
             ) {
 
+                if (
+                    draggedData.companies.length === 0
+                ) {
+
+                    draggedData = null;
+
+                    showStatus(
+                        "This group has no companies."
+                    );
+
+                    return;
+                }
+
+
                 if (!schedule[key]) {
 
                     schedule[key] = [];
@@ -1481,7 +2079,6 @@
 
 
                 draggedData = null;
-
 
                 markAsChanged();
 
@@ -1511,7 +2108,6 @@
 
 
                 draggedData = null;
-
 
                 markAsChanged();
 
@@ -1673,7 +2269,7 @@
 
 
         /* =========================================================
-           REMOVE COMPANY
+           REMOVE COMPANY FROM PLANNER
            ========================================================= */
 
         function removeCompany(
@@ -1770,7 +2366,7 @@
 
 
         /* =========================================================
-           LOAD FROM SUPABASE
+           LOAD SCHEDULE
            ========================================================= */
 
         async function loadSchedule() {
@@ -1841,7 +2437,6 @@
 
 
                 hasUnsavedChanges = false;
-
 
                 updateButtons();
 
@@ -1982,8 +2577,6 @@
                 }
 
 
-                /* Save successful */
-
                 savedSchedule =
                     cloneSchedule(
                         schedule
@@ -1991,7 +2584,6 @@
 
 
                 hasUnsavedChanges = false;
-
 
                 updateButtons();
 
@@ -2120,6 +2712,1329 @@
 
 
         /* =========================================================
+           COMPANY MANAGEMENT
+           ========================================================= */
+
+        function openCompanyManager() {
+
+            document
+                .getElementById(
+                    "companyManagerModal"
+                )
+                .classList.add("show");
+
+
+            renderManagementList();
+
+        }
+
+
+        function closeCompanyManager() {
+
+            document
+                .getElementById(
+                    "companyManagerModal"
+                )
+                .classList.remove("show");
+
+        }
+
+
+        /* =========================================================
+           RENDER MANAGEMENT LIST
+           ========================================================= */
+
+        function renderManagementList() {
+
+            const container =
+                document.getElementById(
+                    "managementList"
+                );
+
+            container.innerHTML = "";
+
+
+            const groups =
+                companies.filter(
+                    item => item.is_group
+                );
+
+
+            const standalone =
+                companies.filter(
+                    item =>
+                        !item.is_group &&
+                        !item.group_id
+                );
+
+
+            if (
+                groups.length === 0 &&
+                standalone.length === 0
+            ) {
+
+                const empty =
+                    document.createElement("div");
+
+                empty.className =
+                    "empty-management";
+
+                empty.textContent =
+                    "No companies or groups added yet.";
+
+                container.appendChild(empty);
+
+                return;
+
+            }
+
+
+            /* GROUPS */
+
+            groups.forEach(group => {
+
+                const groupElement =
+                    document.createElement("div");
+
+                groupElement.className =
+                    "management-group";
+
+
+                const groupHeader =
+                    document.createElement("div");
+
+                groupHeader.className =
+                    "management-group-header";
+
+
+                const groupName =
+                    document.createElement("div");
+
+                groupName.className =
+                    "management-group-name";
+
+                groupName.textContent =
+                    group.name;
+
+
+                const groupActions =
+                    document.createElement("div");
+
+                groupActions.className =
+                    "management-actions";
+
+
+                const editButton =
+                    document.createElement("button");
+
+                editButton.className =
+                    "edit-company-btn";
+
+                editButton.textContent =
+                    "Edit";
+
+
+                editButton.addEventListener(
+                    "click",
+                    function () {
+
+                        openGroupForm(group.id);
+
+                    }
+                );
+
+
+                const deleteButton =
+                    document.createElement("button");
+
+                deleteButton.className =
+                    "delete-company-btn";
+
+                deleteButton.textContent =
+                    "Delete";
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    function () {
+
+                        deleteGroup(group);
+
+                    }
+                );
+
+
+                groupActions.appendChild(
+                    editButton
+                );
+
+                groupActions.appendChild(
+                    deleteButton
+                );
+
+
+                groupHeader.appendChild(
+                    groupName
+                );
+
+                groupHeader.appendChild(
+                    groupActions
+                );
+
+
+                groupElement.appendChild(
+                    groupHeader
+                );
+
+
+                /* Group children */
+
+                companies
+                    .filter(
+                        item =>
+                            !item.is_group &&
+                            item.group_id === group.id
+                    )
+                    .forEach(company => {
+
+                        const companyElement =
+                            document.createElement("div");
+
+                        companyElement.className =
+                            "management-company";
+
+
+                        const companyName =
+                            document.createElement("div");
+
+                        companyName.className =
+                            "management-company-name";
+
+                        companyName.textContent =
+                            company.name;
+
+
+                        const actions =
+                            document.createElement("div");
+
+                        actions.className =
+                            "management-actions";
+
+
+                        const editButton =
+                            document.createElement("button");
+
+                        editButton.className =
+                            "edit-company-btn";
+
+                        editButton.textContent =
+                            "Edit";
+
+
+                        editButton.addEventListener(
+                            "click",
+                            function () {
+
+                                openCompanyForm(
+                                    company.id
+                                );
+
+                            }
+                        );
+
+
+                        const deleteButton =
+                            document.createElement("button");
+
+                        deleteButton.className =
+                            "delete-company-btn";
+
+                        deleteButton.textContent =
+                            "Delete";
+
+
+                        deleteButton.addEventListener(
+                            "click",
+                            function () {
+
+                                deleteCompany(
+                                    company
+                                );
+
+                            }
+                        );
+
+
+                        actions.appendChild(
+                            editButton
+                        );
+
+                        actions.appendChild(
+                            deleteButton
+                        );
+
+
+                        companyElement.appendChild(
+                            companyName
+                        );
+
+                        companyElement.appendChild(
+                            actions
+                        );
+
+
+                        groupElement.appendChild(
+                            companyElement
+                        );
+
+                    });
+
+
+                container.appendChild(
+                    groupElement
+                );
+
+            });
+
+
+            /* STANDALONE */
+
+            standalone.forEach(company => {
+
+                const element =
+                    document.createElement("div");
+
+                element.className =
+                    "management-standalone";
+
+
+                const name =
+                    document.createElement("div");
+
+                name.className =
+                    "management-company-name";
+
+                name.textContent =
+                    company.name;
+
+
+                const actions =
+                    document.createElement("div");
+
+                actions.className =
+                    "management-actions";
+
+
+                const editButton =
+                    document.createElement("button");
+
+                editButton.className =
+                    "edit-company-btn";
+
+                editButton.textContent =
+                    "Edit";
+
+
+                editButton.addEventListener(
+                    "click",
+                    function () {
+
+                        openCompanyForm(
+                            company.id
+                        );
+
+                    }
+                );
+
+
+                const deleteButton =
+                    document.createElement("button");
+
+                deleteButton.className =
+                    "delete-company-btn";
+
+                deleteButton.textContent =
+                    "Delete";
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    function () {
+
+                        deleteCompany(
+                            company
+                        );
+
+                    }
+                );
+
+
+                actions.appendChild(
+                    editButton
+                );
+
+                actions.appendChild(
+                    deleteButton
+                );
+
+
+                element.appendChild(name);
+
+                element.appendChild(actions);
+
+                container.appendChild(element);
+
+            });
+
+        }
+
+
+        /* =========================================================
+           GROUP FORM
+           ========================================================= */
+
+        function openGroupForm(groupId = null) {
+
+            editingCompanyId =
+                groupId;
+
+            editingIsGroup =
+                true;
+
+
+            const title =
+                document.getElementById(
+                    "formTitle"
+                );
+
+            const input =
+                document.getElementById(
+                    "nameInput"
+                );
+
+            const groupContainer =
+                document.getElementById(
+                    "groupSelectContainer"
+                );
+
+            const saveButton =
+                document.getElementById(
+                    "formSaveButton"
+                );
+
+
+            groupContainer.style.display =
+                "none";
+
+
+            if (groupId === null) {
+
+                title.textContent =
+                    "Add Group";
+
+                input.value =
+                    "";
+
+                saveButton.textContent =
+                    "Add";
+
+            }
+            else {
+
+                const group =
+                    companies.find(
+                        item =>
+                            item.id === groupId &&
+                            item.is_group
+                    );
+
+
+                if (!group) {
+                    return;
+                }
+
+
+                title.textContent =
+                    "Edit Group";
+
+                input.value =
+                    group.name;
+
+                saveButton.textContent =
+                    "Save";
+
+            }
+
+
+            document
+                .getElementById(
+                    "formModal"
+                )
+                .classList.add("show");
+
+
+            setTimeout(
+                function () {
+
+                    input.focus();
+
+                },
+                50
+            );
+
+        }
+
+
+        /* =========================================================
+           COMPANY FORM
+           ========================================================= */
+
+        function openCompanyForm(companyId = null) {
+
+            editingCompanyId =
+                companyId;
+
+            editingIsGroup =
+                false;
+
+
+            const title =
+                document.getElementById(
+                    "formTitle"
+                );
+
+            const input =
+                document.getElementById(
+                    "nameInput"
+                );
+
+            const groupContainer =
+                document.getElementById(
+                    "groupSelectContainer"
+                );
+
+            const groupSelect =
+                document.getElementById(
+                    "groupSelect"
+                );
+
+            const saveButton =
+                document.getElementById(
+                    "formSaveButton"
+                );
+
+
+            groupContainer.style.display =
+                "block";
+
+
+            fillGroupSelect();
+
+
+            if (companyId === null) {
+
+                title.textContent =
+                    "Add Company";
+
+                input.value =
+                    "";
+
+                groupSelect.value =
+                    "";
+
+                saveButton.textContent =
+                    "Add";
+
+            }
+            else {
+
+                const company =
+                    companies.find(
+                        item =>
+                            item.id === companyId &&
+                            !item.is_group
+                    );
+
+
+                if (!company) {
+                    return;
+                }
+
+
+                title.textContent =
+                    "Edit Company";
+
+                input.value =
+                    company.name;
+
+                groupSelect.value =
+                    company.group_id || "";
+
+                saveButton.textContent =
+                    "Save";
+
+            }
+
+
+            document
+                .getElementById(
+                    "formModal"
+                )
+                .classList.add("show");
+
+
+            setTimeout(
+                function () {
+
+                    input.focus();
+
+                },
+                50
+            );
+
+        }
+
+
+        /* =========================================================
+           FILL GROUP SELECT
+           ========================================================= */
+
+        function fillGroupSelect() {
+
+            const select =
+                document.getElementById(
+                    "groupSelect"
+                );
+
+
+            select.innerHTML = "";
+
+
+            const noGroup =
+                document.createElement("option");
+
+            noGroup.value =
+                "";
+
+            noGroup.textContent =
+                "No Group";
+
+            select.appendChild(
+                noGroup
+            );
+
+
+            companies
+                .filter(
+                    item => item.is_group
+                )
+                .forEach(group => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+                    option.value =
+                        group.id;
+
+                    option.textContent =
+                        group.name;
+
+                    select.appendChild(
+                        option
+                    );
+
+                });
+
+        }
+
+
+        /* =========================================================
+           SAVE COMPANY FORM
+           ========================================================= */
+
+        async function saveCompanyForm() {
+
+            const input =
+                document.getElementById(
+                    "nameInput"
+                );
+
+
+            const name =
+                input.value.trim();
+
+
+            if (!name) {
+
+                alert(
+                    "Please enter a name."
+                );
+
+                input.focus();
+
+                return;
+
+            }
+
+
+            const saveButton =
+                document.getElementById(
+                    "formSaveButton"
+                );
+
+
+            saveButton.disabled =
+                true;
+
+            saveButton.textContent =
+                "Saving...";
+
+
+            try {
+
+                /* =================================================
+                   GROUP
+                   ================================================= */
+
+                if (editingIsGroup) {
+
+                    if (
+                        editingCompanyId === null
+                    ) {
+
+                        const {
+                            data,
+                            error
+                        } =
+                            await supabaseClient
+                                .from("companies")
+                                .insert({
+                                    name: name,
+                                    group_id: null,
+                                    is_group: true
+                                })
+                                .select()
+                                .single();
+
+
+                        if (error) {
+                            throw error;
+                        }
+
+
+                        companies.push(data);
+
+                        showStatus(
+                            "Group added."
+                        );
+
+                    }
+                    else {
+
+                        const oldGroup =
+                            companies.find(
+                                item =>
+                                    item.id ===
+                                    editingCompanyId
+                            );
+
+
+                        if (!oldGroup) {
+                            return;
+                        }
+
+
+                        const oldName =
+                            oldGroup.name;
+
+
+                        const {
+                            error
+                        } =
+                            await supabaseClient
+                                .from("companies")
+                                .update({
+                                    name: name
+                                })
+                                .eq(
+                                    "id",
+                                    editingCompanyId
+                                );
+
+
+                        if (error) {
+                            throw error;
+                        }
+
+
+                        /* Update local group */
+
+                        oldGroup.name =
+                            name;
+
+
+                        showStatus(
+                            "Group updated."
+                        );
+
+                    }
+
+
+                    closeFormModal();
+
+                    createCompanyList();
+
+                    renderManagementList();
+
+                    return;
+                }
+
+
+                /* =================================================
+                   COMPANY
+                   ================================================= */
+
+                const groupSelect =
+                    document.getElementById(
+                        "groupSelect"
+                    );
+
+
+                const groupId =
+                    groupSelect.value
+                        ? Number(
+                            groupSelect.value
+                        )
+                        : null;
+
+
+                if (
+                    editingCompanyId === null
+                ) {
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient
+                            .from("companies")
+                            .insert({
+                                name: name,
+                                group_id: groupId,
+                                is_group: false
+                            })
+                            .select()
+                            .single();
+
+
+                    if (error) {
+                        throw error;
+                    }
+
+
+                    companies.push(data);
+
+                    showStatus(
+                        "Company added."
+                    );
+
+                }
+                else {
+
+                    const company =
+                        companies.find(
+                            item =>
+                                item.id ===
+                                editingCompanyId &&
+                                !item.is_group
+                        );
+
+
+                    if (!company) {
+                        return;
+                    }
+
+
+                    const oldName =
+                        company.name;
+
+
+                    const {
+                        error
+                    } =
+                        await supabaseClient
+                            .from("companies")
+                            .update({
+                                name: name,
+                                group_id: groupId
+                            })
+                            .eq(
+                                "id",
+                                editingCompanyId
+                            );
+
+
+                    if (error) {
+                        throw error;
+                    }
+
+
+                    /* Update existing schedule
+                       if company name changed */
+
+                    if (
+                        oldName !== name
+                    ) {
+
+                        const {
+                            error: scheduleError
+                        } =
+                            await supabaseClient
+                                .from(
+                                    "weekly_schedule"
+                                )
+                                .update({
+                                    company: name
+                                })
+                                .eq(
+                                    "company",
+                                    oldName
+                                );
+
+
+                        if (scheduleError) {
+
+                            console.error(
+                                "Schedule update error:",
+                                scheduleError
+                            );
+
+                        }
+
+
+                        updateLocalScheduleCompanyName(
+                            oldName,
+                            name
+                        );
+
+                    }
+
+
+                    company.name =
+                        name;
+
+                    company.group_id =
+                        groupId;
+
+
+                    showStatus(
+                        "Company updated."
+                    );
+
+                }
+
+
+                closeFormModal();
+
+                createCompanyList();
+
+                renderManagementList();
+
+                renderSchedule();
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                showStatus(
+                    "Could not save the company."
+                );
+
+            }
+            finally {
+
+                saveButton.disabled =
+                    false;
+
+                saveButton.textContent =
+                    editingCompanyId === null
+                        ? "Add"
+                        : "Save";
+
+            }
+
+        }
+
+
+        /* =========================================================
+           UPDATE LOCAL SCHEDULE COMPANY NAME
+           ========================================================= */
+
+        function updateLocalScheduleCompanyName(
+            oldName,
+            newName
+        ) {
+
+            Object.keys(schedule)
+                .forEach(key => {
+
+                    schedule[key] =
+                        schedule[key].map(
+                            company =>
+                                company === oldName
+                                    ? newName
+                                    : company
+                        );
+
+                });
+
+
+            savedSchedule =
+                cloneSchedule(
+                    schedule
+                );
+
+        }
+
+
+        /* =========================================================
+           DELETE COMPANY
+           ========================================================= */
+
+        async function deleteCompany(company) {
+
+            const confirmed =
+                confirm(
+                    "Delete \"" +
+                    company.name +
+                    "\"?\n\nIf this company is already used in the weekly planner, it will also be removed from the saved schedule."
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            try {
+
+                /* Remove from weekly schedule */
+
+                const {
+                    error: scheduleError
+                } =
+                    await supabaseClient
+                        .from(
+                            "weekly_schedule"
+                        )
+                        .delete()
+                        .eq(
+                            "company",
+                            company.name
+                        );
+
+
+                if (scheduleError) {
+                    throw scheduleError;
+                }
+
+
+                /* Remove company */
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("companies")
+                        .delete()
+                        .eq(
+                            "id",
+                            company.id
+                        );
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                companies =
+                    companies.filter(
+                        item =>
+                            item.id !==
+                            company.id
+                    );
+
+
+                removeLocalScheduleCompany(
+                    company.name
+                );
+
+
+                savedSchedule =
+                    cloneSchedule(
+                        schedule
+                    );
+
+
+                hasUnsavedChanges = false;
+
+                updateButtons();
+
+                createCompanyList();
+
+                renderManagementList();
+
+                renderSchedule();
+
+
+                showStatus(
+                    "Company deleted."
+                );
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                showStatus(
+                    "Could not delete the company."
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           DELETE GROUP
+           ========================================================= */
+
+        async function deleteGroup(group) {
+
+            const children =
+                companies.filter(
+                    item =>
+                        !item.is_group &&
+                        item.group_id === group.id
+                );
+
+
+            let message =
+                "Delete group \"" +
+                group.name +
+                "\"?";
+
+
+            if (children.length > 0) {
+
+                message +=
+                    "\n\nThis group contains " +
+                    children.length +
+                    " company/companies.";
+
+                message +=
+                    "\nThey will also be deleted from the company list and weekly planner.";
+
+            }
+
+
+            const confirmed =
+                confirm(message);
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            try {
+
+                const childNames =
+                    children.map(
+                        child =>
+                            child.name
+                    );
+
+
+                /* Remove children from schedule */
+
+                for (
+                    const companyName
+                    of childNames
+                ) {
+
+                    const {
+                        error
+                    } =
+                        await supabaseClient
+                            .from(
+                                "weekly_schedule"
+                            )
+                            .delete()
+                            .eq(
+                                "company",
+                                companyName
+                            );
+
+
+                    if (error) {
+                        throw error;
+                    }
+
+                }
+
+
+                /* Delete group.
+                   Database cascade removes children. */
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("companies")
+                        .delete()
+                        .eq(
+                            "id",
+                            group.id
+                        );
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                const idsToRemove =
+                    new Set([
+                        group.id,
+                        ...children.map(
+                            child =>
+                                child.id
+                        )
+                    ]);
+
+
+                companies =
+                    companies.filter(
+                        item =>
+                            !idsToRemove.has(
+                                item.id
+                            )
+                    );
+
+
+                childNames.forEach(
+                    companyName => {
+
+                        removeLocalScheduleCompany(
+                            companyName
+                        );
+
+                    }
+                );
+
+
+                savedSchedule =
+                    cloneSchedule(
+                        schedule
+                    );
+
+
+                hasUnsavedChanges = false;
+
+                updateButtons();
+
+                createCompanyList();
+
+                renderManagementList();
+
+                renderSchedule();
+
+
+                showStatus(
+                    "Group deleted."
+                );
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                showStatus(
+                    "Could not delete the group."
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           REMOVE COMPANY FROM LOCAL SCHEDULE
+           ========================================================= */
+
+        function removeLocalScheduleCompany(
+            companyName
+        ) {
+
+            Object.keys(schedule)
+                .forEach(key => {
+
+                    schedule[key] =
+                        schedule[key].filter(
+                            company =>
+                                company !==
+                                companyName
+                        );
+
+
+                    if (
+                        schedule[key].length === 0
+                    ) {
+
+                        delete schedule[key];
+
+                    }
+
+                });
+
+        }
+
+
+        /* =========================================================
+           CLOSE FORM
+           ========================================================= */
+
+        function closeFormModal() {
+
+            document
+                .getElementById(
+                    "formModal"
+                )
+                .classList.remove("show");
+
+
+            document
+                .getElementById(
+                    "nameInput"
+                )
+                .value = "";
+
+
+            editingCompanyId =
+                null;
+
+            editingIsGroup =
+                false;
+
+        }
+
+
+        /* =========================================================
            STATUS MESSAGE
            ========================================================= */
 
@@ -2178,4 +4093,3 @@
 
 </body>
 </html>
-
