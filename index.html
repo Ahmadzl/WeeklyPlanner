@@ -29,6 +29,153 @@
             overflow-x: hidden;
         }
 
+
+        /* =========================================================
+           LOGIN SCREEN
+           ========================================================= */
+
+        .login-screen {
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background: #f5f6fa;
+        }
+
+        .login-box {
+            width: 100%;
+
+            max-width: 380px;
+
+            background: white;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            padding: 30px;
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .login-box h1 {
+            margin: 0 0 8px 0;
+
+            text-align: center;
+
+            font-size: 24px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+
+            color: #777;
+
+            font-size: 13px;
+
+            margin-bottom: 25px;
+        }
+
+        .login-label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 6px;
+        }
+
+        .login-input {
+            width: 100%;
+
+            padding: 11px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 14px;
+
+            margin-bottom: 15px;
+
+            outline: none;
+        }
+
+        .login-input:focus {
+            border-color: #4a44f2;
+        }
+
+        .login-button {
+            width: 100%;
+
+            border: none;
+
+            background: #4a44f2;
+
+            color: white;
+
+            padding: 11px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+        .login-button:hover {
+            background: #3934c9;
+        }
+
+        .login-error {
+            display: none;
+
+            background: #f8d7da;
+
+            color: #842029;
+
+            border: 1px solid #f5c2c7;
+
+            padding: 9px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            margin-bottom: 15px;
+
+            text-align: center;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+
+        /* =========================================================
+           APP
+           ========================================================= */
+
+        #app {
+            display: none;
+
+            min-height: 100vh;
+        }
+
+        #app.show {
+            display: block;
+        }
+
+
         /* =========================================================
            HEADER
            ========================================================= */
@@ -90,7 +237,8 @@
         .save-btn,
         .discard-btn,
         .reset-btn,
-        .manage-btn {
+        .manage-btn,
+        .logout-btn {
             border: none;
 
             color: white;
@@ -146,6 +294,14 @@
 
         .manage-btn:hover {
             background: #3934c9;
+        }
+
+        .logout-btn {
+            background: #343a40;
+        }
+
+        .logout-btn:hover {
+            background: #212529;
         }
 
 
@@ -935,7 +1091,7 @@
                 display: grid;
 
                 grid-template-columns:
-                    1fr 1fr 1fr 1fr;
+                    1fr 1fr 1fr 1fr 1fr;
 
                 width: 100%;
             }
@@ -943,12 +1099,13 @@
             .save-btn,
             .discard-btn,
             .reset-btn,
-            .manage-btn {
+            .manage-btn,
+            .logout-btn {
                 width: 100%;
 
-                padding: 8px 5px;
+                padding: 8px 4px;
 
-                font-size: 10px;
+                font-size: 9px;
             }
 
             .main {
@@ -1180,67 +1337,72 @@
 
 <body>
 
+
     <!-- =========================================================
-         HEADER
+         LOGIN SCREEN
          ========================================================= -->
 
-    <div class="header">
+    <div
+        id="loginScreen"
+        class="login-screen">
 
-        <div class="header-left">
+        <div class="login-box">
 
             <h1>
                 Weekly Work Planner
             </h1>
 
-            <span
-                id="unsavedIndicator"
-                class="unsaved">
-
-                Unsaved changes
-
-            </span>
-
-        </div>
+            <div class="login-subtitle">
+                Please sign in to continue
+            </div>
 
 
-        <div class="header-buttons">
+            <div
+                id="loginError"
+                class="login-error">
+
+                Invalid username or password.
+
+            </div>
+
+
+            <label
+                class="login-label"
+                for="usernameInput">
+
+                Username
+
+            </label>
+
+            <input
+                id="usernameInput"
+                class="login-input"
+                type="text"
+                autocomplete="username"
+                placeholder="Username">
+
+
+            <label
+                class="login-label"
+                for="passwordInput">
+
+                Password
+
+            </label>
+
+            <input
+                id="passwordInput"
+                class="login-input"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Password">
+
 
             <button
-                class="manage-btn"
-                onclick="openCompanyManager()">
+                class="login-button"
+                onclick="login()">
 
-                Manage Companies
-
-            </button>
-
-
-            <button
-                id="saveButton"
-                class="save-btn"
-                onclick="saveChanges()"
-                disabled>
-
-                Save Changes
-
-            </button>
-
-
-            <button
-                id="discardButton"
-                class="discard-btn"
-                onclick="discardChanges()"
-                disabled>
-
-                Discard
-
-            </button>
-
-
-            <button
-                class="reset-btn"
-                onclick="resetPlanner()">
-
-                Reset
+                Login
 
             </button>
 
@@ -1250,192 +1412,417 @@
 
 
     <!-- =========================================================
-         MAIN
+         APPLICATION
          ========================================================= -->
 
-    <div class="main">
+    <div id="app">
 
-        <!-- SIDEBAR -->
 
-        <aside class="sidebar">
+        <!-- =====================================================
+             HEADER
+             ===================================================== -->
 
-            <h2>
-                Companies
-            </h2>
+        <div class="header">
 
-            <div class="sidebar-info">
-                Drag a company or a group to a day and time.
+            <div class="header-left">
+
+                <h1>
+                    Weekly Work Planner
+                </h1>
+
+                <span
+                    id="unsavedIndicator"
+                    class="unsaved">
+
+                    Unsaved changes
+
+                </span>
+
             </div>
 
-            <div
-                id="companyList"
-                class="company-list">
-            </div>
 
-        </aside>
-
-
-        <!-- PLANNER -->
-
-        <main class="planner">
-
-            <div
-                id="plannerGrid"
-                class="grid">
-            </div>
-
-        </main>
-
-    </div>
-
-
-    <!-- =========================================================
-         COMPANY MANAGEMENT MODAL
-         ========================================================= -->
-
-    <div
-        id="companyManagerModal"
-        class="modal-overlay">
-
-        <div class="company-modal">
-
-            <div class="modal-header">
-
-                <h2>
-                    Manage Companies
-                </h2>
+            <div class="header-buttons">
 
                 <button
-                    class="modal-close"
-                    onclick="closeCompanyManager()">
+                    class="manage-btn"
+                    onclick="openCompanyManager()">
 
-                    ×
+                    Manage Companies
+
+                </button>
+
+
+                <button
+                    id="saveButton"
+                    class="save-btn"
+                    onclick="saveChanges()"
+                    disabled>
+
+                    Save Changes
+
+                </button>
+
+
+                <button
+                    id="discardButton"
+                    class="discard-btn"
+                    onclick="discardChanges()"
+                    disabled>
+
+                    Discard
+
+                </button>
+
+
+                <button
+                    class="reset-btn"
+                    onclick="resetPlanner()">
+
+                    Reset
+
+                </button>
+
+
+                <button
+                    class="logout-btn"
+                    onclick="logout()">
+
+                    Logout
 
                 </button>
 
             </div>
 
+        </div>
 
-            <div class="modal-body">
 
-                <div class="modal-actions">
+        <!-- =====================================================
+             MAIN
+             ===================================================== -->
+
+        <div class="main">
+
+            <!-- SIDEBAR -->
+
+            <aside class="sidebar">
+
+                <h2>
+                    Companies
+                </h2>
+
+                <div class="sidebar-info">
+                    Drag a company or a group to a day and time.
+                </div>
+
+                <div
+                    id="companyList"
+                    class="company-list">
+                </div>
+
+            </aside>
+
+
+            <!-- PLANNER -->
+
+            <main class="planner">
+
+                <div
+                    id="plannerGrid"
+                    class="grid">
+                </div>
+
+            </main>
+
+        </div>
+
+
+        <!-- =====================================================
+             COMPANY MANAGEMENT MODAL
+             ===================================================== -->
+
+        <div
+            id="companyManagerModal"
+            class="modal-overlay">
+
+            <div class="company-modal">
+
+                <div class="modal-header">
+
+                    <h2>
+                        Manage Companies
+                    </h2>
 
                     <button
-                        class="add-group-btn"
-                        onclick="openGroupForm()">
+                        class="modal-close"
+                        onclick="closeCompanyManager()">
 
-                        + Add Group
+                        ×
 
                     </button>
 
+                </div>
 
-                    <button
-                        class="add-company-btn"
-                        onclick="openCompanyForm()">
 
-                        + Add Company
+                <div class="modal-body">
 
-                    </button>
+                    <div class="modal-actions">
+
+                        <button
+                            class="add-group-btn"
+                            onclick="openGroupForm()">
+
+                            + Add Group
+
+                        </button>
+
+
+                        <button
+                            class="add-company-btn"
+                            onclick="openCompanyForm()">
+
+                            + Add Company
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="managementList"
+                        class="management-list">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             FORM MODAL
+             ===================================================== -->
+
+        <div
+            id="formModal"
+            class="modal-overlay">
+
+            <div class="form-modal">
+
+                <h3 id="formTitle">
+                    Add Company
+                </h3>
+
+
+                <div class="form-group">
+
+                    <label for="nameInput">
+                        Name
+                    </label>
+
+                    <input
+                        id="nameInput"
+                        type="text"
+                        autocomplete="off">
 
                 </div>
 
 
                 <div
-                    id="managementList"
-                    class="management-list">
+                    id="groupSelectContainer"
+                    class="form-group">
+
+                    <label for="groupSelect">
+                        Group
+                    </label>
+
+                    <select id="groupSelect">
+
+                        <option value="">
+                            No Group
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button
+                        class="form-cancel"
+                        onclick="closeFormModal()">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        id="formSaveButton"
+                        class="form-save"
+                        onclick="saveCompanyForm()">
+
+                        Add
+
+                    </button>
+
                 </div>
 
             </div>
 
         </div>
 
-    </div>
 
+        <!-- STATUS -->
 
-    <!-- =========================================================
-         FORM MODAL
-         ========================================================= -->
-
-    <div
-        id="formModal"
-        class="modal-overlay">
-
-        <div class="form-modal">
-
-            <h3 id="formTitle">
-                Add Company
-            </h3>
-
-
-            <div class="form-group">
-
-                <label for="nameInput">
-                    Name
-                </label>
-
-                <input
-                    id="nameInput"
-                    type="text"
-                    autocomplete="off">
-
-            </div>
-
-
-            <div
-                id="groupSelectContainer"
-                class="form-group">
-
-                <label for="groupSelect">
-                    Group
-                </label>
-
-                <select id="groupSelect">
-
-                    <option value="">
-                        No Group
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-buttons">
-
-                <button
-                    class="form-cancel"
-                    onclick="closeFormModal()">
-
-                    Cancel
-
-                </button>
-
-
-                <button
-                    id="formSaveButton"
-                    class="form-save"
-                    onclick="saveCompanyForm()">
-
-                    Add
-
-                </button>
-
-            </div>
-
+        <div
+            id="statusMessage"
+            class="status-message">
         </div>
 
     </div>
 
 
-    <!-- STATUS -->
-
-    <div
-        id="statusMessage"
-        class="status-message">
-    </div>
-
-
     <script>
+
+        /* =========================================================
+           LOGIN
+           ========================================================= */
+
+        const LOGIN_USERNAME = "Admin";
+
+        const LOGIN_PASSWORD = "Venture.321";
+
+        let appInitialized = false;
+
+
+        function login() {
+
+            const username =
+                document.getElementById(
+                    "usernameInput"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "passwordInput"
+                ).value;
+
+
+            const error =
+                document.getElementById(
+                    "loginError"
+                );
+
+
+            if (
+                username === LOGIN_USERNAME &&
+                password === LOGIN_PASSWORD
+            ) {
+
+                sessionStorage.setItem(
+                    "weeklyPlannerLoggedIn",
+                    "true"
+                );
+
+
+                error.classList.remove(
+                    "show"
+                );
+
+
+                showApp();
+
+            }
+            else {
+
+                error.classList.add(
+                    "show"
+                );
+
+            }
+
+        }
+
+
+        async function showApp() {
+
+            document.getElementById(
+                "loginScreen"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "app"
+            ).classList.add("show");
+
+
+            if (!appInitialized) {
+
+                appInitialized = true;
+
+                createPlanner();
+
+                await loadCompanies();
+
+                await loadSchedule();
+
+            }
+
+        }
+
+
+        function logout() {
+
+            if (hasUnsavedChanges) {
+
+                const confirmed =
+                    confirm(
+                        "You have unsaved changes. Are you sure you want to logout?"
+                    );
+
+
+                if (!confirmed) {
+                    return;
+                }
+
+            }
+
+
+            sessionStorage.removeItem(
+                "weeklyPlannerLoggedIn"
+            );
+
+
+            location.reload();
+
+        }
+
+
+        /* =========================================================
+           LOGIN WITH ENTER
+           ========================================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter" &&
+                    document.getElementById(
+                        "loginScreen"
+                    ).style.display !== "none"
+                ) {
+
+                    login();
+
+                }
+
+            }
+        );
+
 
         /* =========================================================
            SUPABASE
@@ -1514,11 +1901,17 @@
             "DOMContentLoaded",
             async function () {
 
-                createPlanner();
+                const loggedIn =
+                    sessionStorage.getItem(
+                        "weeklyPlannerLoggedIn"
+                    );
 
-                await loadCompanies();
 
-                await loadSchedule();
+                if (loggedIn === "true") {
+
+                    await showApp();
+
+                }
 
             }
         );
@@ -3446,10 +3839,6 @@
                         }
 
 
-                        const oldName =
-                            oldGroup.name;
-
-
                         const {
                             error
                         } =
@@ -3468,8 +3857,6 @@
                             throw error;
                         }
 
-
-                        /* Update local group */
 
                         oldGroup.name =
                             name;
@@ -3888,8 +4275,7 @@
                 }
 
 
-                /* Delete group.
-                   Database cascade removes children. */
+                /* Delete group */
 
                 const {
                     error
